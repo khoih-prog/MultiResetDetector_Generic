@@ -68,7 +68,7 @@
     * [ 3.4 Reset Detected => Reporting 3](#34-reset-detected--reporting-3)
     * [ 3.5 Reset Detected => Reporting 4](#35-reset-detected--reporting-4)
     * [ 3.8 Reset Detected => Reporting 1](#38-reset-detected--reporting-1)
-  * [4. minimal on minimal on Arduino SAMD21 Nano-33-IoT using FlashStorage_SAMD](#3-minimal-on-arduino-samd21-nano-33-iot-using-flashstorage_samd)
+  * [4. minimal on minimal on Arduino SAMD21 Nano-33-IoT using FlashStorage_SAMD](#4-minimal-on-arduino-samd21-nano-33-iot-using-flashstorage_samd)
     * [ 4.1 Data Corrupted => reset to 0](#41-data-corrupted--reset-to-0)
     * [ 4.2 Reset Detected => Reporting 1](#42-reset-detected--reporting-1)
     * [ 4.3 Reset Detected => Reporting 2](#43-reset-detected--reporting-2)
@@ -343,11 +343,11 @@ theses files must be copied into the corresponding directory:
 
 ### Purpose
 
-Detects a multi reset so that an alternative start-up mode can be used. One example use is to allow re-configuration of a device's WiFi or Blynk Credentials.
+Detects a multi reset so that an alternative start-up mode can be used. One example use is to allow re-configuration of a device's WiFi or Blynk Credentials or to count the number of resets within a pre-determined timed.
 
 ### How It Works
   
-   When the device starts up it checks the EEPROM, (Due)FlashStorage or LittleFS file `/drd.dat` for a flag to see if it has been recently reset within the configurable timeout seconds
+   When the device starts up it checks the EEPROM, (Due)FlashStorage or LittleFS file `/mrd.dat` for a flag to see if it has been recently reset within the configurable timeout seconds
    
 ---
    
