@@ -1,0 +1,39 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MultiResetDetector_Generic
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+detectMultiReset		KEYWORD2
+loop	KEYWORD2
+stop	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+MULTIRESETDETECTOR_DEBUG  LITERAL1
+MRD_TIMES LITERAL1
+MRD_TIMEOUT LITERAL1
+MRD_ADDRESS LITERAL1
+MRD_GENERIC_USE_EEPROM  LITERAL1
+MRD_GENERIC_USE_SAMD  LITERAL1
+MRD_GENERIC_USE_SAM_DUE LITERAL1
+MRD_GENERIC_USE_NRF52 LITERAL1
+MULTIRESETDETECTOR_FLAG_BEGIN  LITERAL1
+MULTIRESETDETECTOR_FLAG_CLEAR  LITERAL1
+FLAG_DATA_SIZE  LITERAL1
+MRD_FILENAME  LITERAL1
+MRD_FLAG_OFFSET LITERAL1
