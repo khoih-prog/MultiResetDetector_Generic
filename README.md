@@ -436,9 +436,9 @@ void loop()
 
 ---
 
-### Debug Terminal Output Samples
+## Debug Terminal Output Samples
 
-#### 1. minimal on Adafruit Itsy-Bitsy nRF52840 Express using LittleFS
+### 1. minimal on Adafruit Itsy-Bitsy nRF52840 Express using LittleFS
 
 This is terminal debug output when running [minimal](examples/minimal) on ***Adafruit Itsy-Bitsy nRF52840 Express using LittleFS.***. MRD_TIMES is set at 5 and MRD_TIMEOUT at 10 seconds.
 
@@ -552,7 +552,7 @@ Multi Reset Detected
 
 ---
 
-#### 2. minimal on Teensy 4.0 using EEPROM
+### 2. minimal on Teensy 4.0 using EEPROM
 
 This is terminal debug output when running [minimal](examples/minimal) on ***Teensy 4.0 using EEPROM.***. MRD_TIMES is set at 5 and MRD_TIMEOUT at 10 seconds.
 
@@ -652,7 +652,7 @@ Multi Reset Detected
 
 ---
 
-#### 3. minimal on SAM DUE using DueFlashStorage
+### 3. minimal on SAM DUE using DueFlashStorage
 
 This is terminal debug output when running [minimal](examples/minimal) on ***SAM DUE using DueFlashStorage.***. MRD_TIMES is set at 5 and MRD_TIMEOUT at 10 seconds.
 
@@ -739,7 +739,7 @@ Multi Reset Detected
 
 ---
 
-#### 4. minimal on Arduino SAMD21 Nano-33-IoT using FlashStorage_SAMD
+### 4. minimal on Arduino SAMD21 Nano-33-IoT using FlashStorage_SAMD
 
 This is terminal debug output when running [minimal](examples/minimal) on ***Arduino SAMD21 Nano-33-IoT using FlashStorage_SAMD***. MRD_TIMES is set at 5 and MRD_TIMEOUT at 10 seconds.
 
