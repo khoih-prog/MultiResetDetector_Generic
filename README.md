@@ -71,7 +71,7 @@
     * [ 3.3 Reset Detected => Reporting 2](#33-reset-detected--reporting-2)
     * [ 3.4 Reset Detected => Reporting 3](#34-reset-detected--reporting-3)
     * [ 3.5 Reset Detected => Reporting 4](#35-reset-detected--reporting-4)
-    * [ 3.8 Reset Detected => Reporting 1](#38-reset-detected--reporting-1)
+    * [ 3.6 Reset Detected => Reporting 5. Multi Reset Detected](#36-reset-detected--reporting-5-multi-reset-detected)
   * [4. minimal on minimal on Arduino SAMD21 Nano-33-IoT using FlashStorage_SAMD](#4-minimal-on-arduino-samd21-nano-33-iot-using-flashstorage_samd)
     * [ 4.1 Data Corrupted => reset to 0](#41-data-corrupted--reset-to-0)
     * [ 4.2 Reset Detected => Reporting 1](#42-reset-detected--reporting-1)
@@ -79,6 +79,7 @@
     * [ 4.4 Reset Detected => Reporting 3](#44-reset-detected--reporting-3)
     * [ 4.5 Reset Detected => Reporting 4](#45-reset-detected--reporting-4)
     * [ 4.6 Reset Detected => Reporting 5. Multi Reset Detected](#46-reset-detected--reporting-5-multi-reset-detected)
+  * [5. minimal on STM32F7 Nucleo-144 NUCLEO_F767ZI using FlashStorage_STM32](#5-minimal-on-stm32f7-nucleo-144-nucleo_f767zi-using-flashstorage_stm32) 
 * [Libraries using ESP_DoubleResetDetector or DoubleResetDetector_Generic library](#libraries-using-esp_doubleresetdetector-or-doubleresetdetector_generic-library)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
@@ -858,6 +859,106 @@ No Multi Reset Detected
 MultiResetDetector minimal Example Program
 MultiResetDetector_Generic v1.1.0
 -----------------------------------
+multiResetDetectorFlag = 0xfffa0005
+lowerBytes = 0x5, upperBytes = 0x5
+multiResetDetected, number of times = 5
+ClearFlag write = 0xfffe0001
+Multi Reset Detected
+```
+
+---
+
+### 5. minimal on STM32F7 Nucleo-144 NUCLEO_F767ZI using FlashStorage_STM32
+
+This is terminal debug output when running [minimal](examples/minimal) on **STM32F7 Nucleo-144 NUCLEO_F767ZI using FlashStorage_STM32**. MRD_TIMES is set at 5 and MRD_TIMEOUT at 10 seconds.
+
+
+#### 5.1 Data Corrupted => reset to 0
+
+```
+MultiResetDetector minimal Example Program
+MultiResetDetector_Generic v1.1.0
+-----------------------------------
+
+(Emulated-)EEPROM size = 16384, start = 0
+multiResetDetectorFlag = 0xffffffff
+lowerBytes = 0xffff, upperBytes = 0x0
+lowerBytes = 0xffff, upperBytes = 0x0
+detectRecentlyResetFlag: Data corrupted. Reset to 0
+ClearFlag write = 0xffff0000
+No multiResetDetected, number of times = 0
+SetFlag write = 0xfffe0001
+No Multi Reset Detected
+```
+
+#### 5.2 Reset Detected => Reporting 1
+
+```
+MultiResetDetector minimal Example Program
+MultiResetDetector_Generic v1.1.0
+-----------------------------------
+
+(Emulated-)EEPROM size = 16384, start = 0
+multiResetDetectorFlag = 0xfffe0001
+lowerBytes = 0x1, upperBytes = 0x1
+No multiResetDetected, number of times = 1
+SetFlag write = 0xfffd0002
+No Multi Reset Detected
+```
+
+#### 5.3 Reset Detected => Reporting 2
+
+```
+MultiResetDetector minimal Example Program
+MultiResetDetector_Generic v1.1.0
+-----------------------------------
+
+(Emulated-)EEPROM size = 16384, start = 0
+multiResetDetectorFlag = 0xfffd0002
+lowerBytes = 0x2, upperBytes = 0x2
+No multiResetDetected, number of times = 2
+SetFlag write = 0xfffc0003
+No Multi Reset Detected
+```
+
+#### 5.4 Reset Detected => Reporting 3
+
+```
+MultiResetDetector minimal Example Program
+MultiResetDetector_Generic v1.1.0
+-----------------------------------
+
+(Emulated-)EEPROM size = 16384, start = 0
+multiResetDetectorFlag = 0xfffc0003
+lowerBytes = 0x3, upperBytes = 0x3
+No multiResetDetected, number of times = 3
+SetFlag write = 0xfffb0004
+No Multi Reset Detected
+```
+
+#### 5.5 Reset Detected => Reporting 4
+
+```
+MultiResetDetector minimal Example Program
+MultiResetDetector_Generic v1.1.0
+-----------------------------------
+
+(Emulated-)EEPROM size = 16384, start = 0
+multiResetDetectorFlag = 0xfffb0004
+lowerBytes = 0x4, upperBytes = 0x4
+No multiResetDetected, number of times = 4
+SetFlag write = 0xfffa0005
+No Multi Reset Detected
+```
+
+#### 5.6 Reset Detected => Reporting 5. Multi Reset Detected
+
+```
+MultiResetDetector minimal Example Program
+MultiResetDetector_Generic v1.1.0
+-----------------------------------
+
+(Emulated-)EEPROM size = 16384, start = 0
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
 multiResetDetected, number of times = 5
