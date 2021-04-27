@@ -12,11 +12,12 @@
 
    Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
    Licensed under MIT license
-   Version: 1.0.3
+   Version: 1.1.0
 
    Version Modified By   Date      Comments
    ------- -----------  ---------- -----------
    1.0.3   K Hoang      30/12/2020 Initial coding to support Multiple Reset Detection. Sync with DoubleResetDetector_Generic v1.0.3
+   1.1.0   K Hoang      27/04/2021 Use new FlashStorage_STM32 library. Add support to new STM32 core v2.0.0 and STM32L5
  ************************************************************************************************************************************/
 
 #pragma once
@@ -24,7 +25,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.0.3"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.1.0"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -83,11 +84,22 @@
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use NRF52 and LittleFS / InternalFS
 
+#elif ( defined(STM32F0) || defined(STM32F1)  || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
+        defined(STM32L0) || defined(STM32L1)  || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
+        defined(STM32WB) || defined(STM32MP1) || defined(STM32L5) )
+  #if defined(MRD_GENERIC_USE_STM32)
+    #undef MRD_GENERIC_USE_STM32
+  #endif
+  #define MRD_GENERIC_USE_STM32      true
+  #if defined(MRD_GENERIC_USE_EEPROM)
+    #undef MRD_GENERIC_USE_EEPROM
+  #endif
+  #define MRD_GENERIC_USE_EEPROM    false
+  #warning Use STM32 and FlashStorage_STM32
+  
 #else
   #if defined(CORE_TEENSY)
     #warning Use TEENSY and EEPROM
-  #elif ( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) )
-    #warning Use STM32 and EEPROM
   #elif ( defined(ARDUINO_AVR_ADK) || defined(ARDUINO_AVR_BT) || defined(ARDUINO_AVR_DUEMILANOVE) || defined(ARDUINO_AVR_ESPLORA) \
       || defined(ARDUINO_AVR_ETHERNET) || defined(ARDUINO_AVR_FIO) || defined(ARDUINO_AVR_GEMMA) || defined(ARDUINO_AVR_LEONARDO) \
       || defined(ARDUINO_AVR_LILYPAD) || defined(ARDUINO_AVR_LILYPAD_USB) || defined(ARDUINO_AVR_MEGA) || defined(ARDUINO_AVR_MEGA2560) \
@@ -127,7 +139,31 @@
   using namespace Adafruit_LittleFS_Namespace;
   
   File MRD_file(InternalFS);
-  
+
+#elif MRD_GENERIC_USE_STM32
+
+/////////////////////////////////////////////
+      
+  #if defined(DATA_EEPROM_BASE)
+      // For STM32 devices having integrated EEPROM.
+      #include <EEPROM.h>
+      #warning STM32 devices have integrated EEPROM. Not using buffered API.   
+  #else  
+      /**
+       Most STM32 devices don't have an integrated EEPROM. To emulate a EEPROM, the STM32 Arduino core emulated
+       the operation of an EEPROM with the help of the embedded flash.
+       Writing to a flash is very expensive operation, since a whole flash page needs to be written, even if you only
+       want to access the flash byte-wise.
+       The STM32 Arduino core provides a buffered access API to the emulated EEPROM. The library has allocated the
+       buffer even if you don't use the buffered API, so it's strongly suggested to use the buffered API anyhow.
+       */
+      #include <FlashStorage_STM32.h>       // https://github.com/khoih-prog/FlashStorage_STM32
+      #warning STM32 devices have no integrated EEPROM. Using buffered API with FlashStorage_STM32 library
+  #endif    // #if defined(DATA_EEPROM_BASE)
+
+  //////////////////////////////////////////////
+ 
+   
 #endif    //#if MRD_GENERIC_USE_EEPROM
 
 #ifndef MRD_GENERIC_DEBUG
@@ -178,14 +214,29 @@ class MultiResetDetector_Generic
       waitingForMultiReset = false;
           
 #if MRD_GENERIC_USE_EEPROM
+
       EEPROM.begin();
+      
   #if (MRD_GENERIC_DEBUG)
       Serial.print(F("\nEEPROM size = "));
       Serial.print(MRD_EEPROM_SIZE);
       Serial.print(F(", start = "));
       Serial.println(MRD_EEPROM_START);
   #endif
-        
+
+#elif (MRD_GENERIC_USE_STM32)
+
+  #if defined(DATA_EEPROM_BASE)      
+      EEPROM.begin();
+  #endif   
+      
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("\n(Emulated-)EEPROM size = ");
+      Serial.print(EEPROM.length());
+      Serial.print(", start = ");
+      Serial.println(MRD_EEPROM_START);
+  #endif
+          
 #elif MRD_GENERIC_USE_SAMD
       // Do something to init FlashStorage
 #elif MRD_GENERIC_USE_SAM_DUE
@@ -316,7 +367,7 @@ class MultiResetDetector_Generic
     
     bool readRecentlyResetFlag()
     {
-#if (MRD_GENERIC_USE_EEPROM)
+#if (MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
       EEPROM.get(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
       multiResetDetectorFlag = MULTIRESETDETECTOR_FLAG;
 
@@ -332,7 +383,7 @@ class MultiResetDetector_Generic
       // nRF52 code    
       multiResetDetectorFlag = readFlagNRF52(); 
         
-#endif    //(MRD_GENERIC_USE_EEPROM)
+#endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
       return true;
     }
@@ -422,7 +473,7 @@ class MultiResetDetector_Generic
 
       multiResetDetectorFlag  = MULTIRESETDETECTOR_FLAG;
 
-#if (MRD_GENERIC_USE_EEPROM)
+#if (MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
       EEPROM.put(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
 
 #if (MRD_GENERIC_DEBUG)
@@ -480,7 +531,7 @@ class MultiResetDetector_Generic
         Serial.println(F("Saving MRD file failed"));
 #endif
       }      
-#endif    //(MRD_GENERIC_USE_EEPROM)
+#endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
 #if (MRD_GENERIC_DEBUG)
       Serial.print(F("SetFlag write = 0x"));
@@ -495,7 +546,7 @@ class MultiResetDetector_Generic
       multiResetDetectorFlag  = flagValue;
       MULTIRESETDETECTOR_FLAG = flagValue;
 
-#if (MRD_GENERIC_USE_EEPROM)
+#if (MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
       EEPROM.put(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
 
 #if (MRD_GENERIC_DEBUG)
@@ -558,14 +609,14 @@ class MultiResetDetector_Generic
       delay(1000);
       readFlagNRF52();
       
-#endif    //(MRD_GENERIC_USE_EEPROM)
+#endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
 #if (MRD_GENERIC_DEBUG)
       Serial.print(F("ClearFlag write = 0x"));
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
 #endif
 
-//#endif    //(MRD_GENERIC_USE_EEPROM)
+//#endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
     };
 
 };

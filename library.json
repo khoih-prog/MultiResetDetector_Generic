@@ -1,7 +1,7 @@
 {
   "name": "MultiResetDetector_Generic",
-  "version": "1.0.3",
-  "keywords": "eeprom,reset,data,avr,teensy,sam-due,samd,stm32,nRF52,Adafruit,double-reset,multi-reset,detector,flashstorage,dueflashstorage,littlefs,spiffs",
+  "version": "1.1.0",
+  "keywords": "eeprom, flashstorage-samd, flashstorage-stm32, avr, teensy, sam-due, samd, stm32, nRF52, double-reset, multi-reset, detector, flashstorage, dueflashstorage, littlefs, spiffs, reset, data",
   "description": "Library to detect a multi reset, using EEPROM, DueFlashStorage, FlashStorage or LittleFS/InternalFS for AVR, Teensy, SAM DUE, SAMD, STM32F/L/H/G/WB/MP1, nRF52 boards",
   "authors":
   {
@@ -21,7 +21,22 @@
       "extras",
       "tests"
     ]
-  },    
+  },
+  "dependencies": 
+  [
+    {
+      "owner": "khoih.prog",
+      "name": "FlashStorage_STM32",
+      "version": ">=1.1.0",
+      "platforms": ["ststm32"]
+    },
+    {
+      "owner": "khoih.prog",
+      "name": "FlashStorage_SAMD",
+      "version": "^1.1.0",
+      "platforms": ["*"]
+    }
+  ],
   "frameworks": "*",
   "platforms": "*",
   "examples": "examples/*/*/*.ino"

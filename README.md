@@ -15,6 +15,7 @@
   * [Features](#features)
   * [Currently supported Boards](#currently-supported-boards)
 * [Changelog](#changelog)
+  * [Major Releases v1.1.0](#major-releases-v110)
   * [Releases v1.0.3](#releases-v103)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -31,6 +32,8 @@
   * [5. For Adafruit SAMD boards](#5-for-adafruit-samd-boards)
   * [6. For Seeeduino SAMD boards](#6-for-seeeduino-samd-boards)
   * [7. For STM32 boards](#7-for-stm32-boards) 
+    * [7.1. For STM32 boards to use LAN8720](#71-for-stm32-boards-to-use-lan8720)
+    * [7.2. For STM32 boards to use Serial1](#72-for-stm32-boards-to-use-serial1)
 * [Purpose](#purpose)
 * [How It Works](#how-it-works)
 * [Examples](#examples)
@@ -45,6 +48,7 @@
     * [ 7. WIOTerminal_WiFiManager](https://github.com/khoih-prog/WIOTerminal_WiFiManager)
     * [ 8. Ethernet_Manager](https://github.com/khoih-prog/Ethernet_Manager)
     * [ 9. Ethernet_Manager_STM32](https://github.com/khoih-prog/Ethernet_Manager_STM32)
+    * [10. WiFiManager_Generic_Lite](https://github.com/khoih-prog/WiFiManager_Generic_Lite)
 * [Example minimal](#example-minimal)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
   * [1. minimal on Adafruit Itsy-Bitsy nRF52840 Express using LittleFS](#1-minimal-on-adafruit-itsy-bitsy-nrf52840-express-using-littlefs)
@@ -141,7 +145,7 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 - Nucleo-64
 - Discovery
 - Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
-- STM32L0, STM32L1, STM32L4
+- STM32L0, STM32L1, STM32L4, **STM32L4**
 - STM32G0, STM32G4
 - STM32H7
 - STM32WB
@@ -155,6 +159,11 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 
 ## Changelog
 
+### Major Releases v1.1.0
+
+1. Use new efficient [**FlashStorage_STM32** library](https://github.com/khoih-prog/FlashStorage_STM32). 
+2. Add support to new **STM32 core v2.0.0** and STM32L5
+
 ### Releases v1.0.3
 
 1. Initial coding to support Multiple Reset Detection.
@@ -166,17 +175,17 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 ## Prerequisites
 
  1. [`Arduino IDE 1.8.13+` for Arduino](https://www.arduino.cc/en/Main/Software)
- 2. [`Teensy core 1.53+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
- 3. [`Arduino SAM DUE core v1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards.
- 4. [`Arduino SAMD core 1.8.11+`](https://github.com/arduino/ArduinoCore-samd) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
- 5. [`Adafruit SAMD core 1.6.5+`](https://github.com/adafruit/ArduinoCore-samd) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
- 6. [`Seeeduino SAMD core 1.8.1+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
- 7. [`Adafruit nRF52 v0.21.0+`](https://github.com/adafruit/Adafruit_nRF52_Arduino) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
- 8. [`Arduino Core for STM32 v1.9.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32F/L/H/G/WB/MP1 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
+ 2. [`Arduino Core for STM32 v2.0.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
+ 3. [`Teensy core 1.53+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
+ 4. [`Arduino SAM DUE core 1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards
+ 5. [`Arduino SAMD core 1.8.11+`](https://www.arduino.cc/en/Guide/ArduinoM0) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
+ 6. [`Adafruit SAMD core 1.6.7+`](https://www.adafruit.com/) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
+ 7. [`Seeeduino SAMD core 1.8.1+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
+ 8. [`Adafruit nRF52 v0.21.0+`](https://www.adafruit.com) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
  9. [`FlashStorage_SAMD library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, NANO_33_IOT, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.). [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_SAMD.svg)](https://github.com/khoih-prog/FlashStorage_SAMD/releases/latest)
-10. [`DueFlashStorage library v1.0.0+`](https://github.com/sebnil/DueFlashStorage) for SAM DUE. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DueFlashStorage.svg?)](https://www.ardu-badge.com/DueFlashStorage)
-11. [`FlashStorage_STM32 library v1.0.1+`](https://github.com/khoih-prog/FlashStorage_STM32). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32).
-12. [`Adafruit's LittleFS/InternalFS`](https://www.adafruit.com) for nRF52. Already included if you already installed Adafruit **nRF52 board package** from Boards Manager.
+10. [`FlashStorage_STM32 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32)
+11. [`DueFlashStorage library v1.0.0+`](https://github.com/sebnil/DueFlashStorage) for SAM DUE. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DueFlashStorage.svg?)](https://www.ardu-badge.com/DueFlashStorage)
+12. [`Adafruit's LittleFS/InternalFS`](www.adafruit.com) for nRF52. Already included if you already installed Adafruit **nRF52 board package** from Boards Manager.
 
 ---
 ---
@@ -268,7 +277,7 @@ This file must be copied into the directory:
  
  ***To be able to compile without error and automatically detect and display BOARD_NAME on Arduino SAMD (Nano-33-IoT, etc) boards***, you have to copy the whole [Arduino SAMD cores 1.8.10](Packages_Patches/arduino/hardware/samd/1.8.10) directory into Arduino SAMD directory (~/.arduino15/packages/arduino/hardware/samd/1.8.10).
  
-#### For core version v1.8.11+
+#### For core version v1.8.10+
 
 Supposing the Arduino SAMD version is 1.8.11. Now only one file must be copied into the directory:
 
@@ -305,11 +314,11 @@ Whenever the above-mentioned compiler error issue is fixed with the new Arduino 
 
 #### 5. For Adafruit SAMD boards
  
- ***To be able to automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the file [Adafruit SAMD platform.txt](Packages_Patches/adafruit/hardware/samd/1.6.4) into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.6.4). 
+ ***To be able to automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the file [Adafruit SAMD platform.txt](Packages_Patches/adafruit/hardware/samd/1.6.7) into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.6.7). 
 
-Supposing the Adafruit SAMD core version is 1.6.4. This file must be copied into the directory:
+Supposing the Adafruit SAMD core version is 1.6.7. This file must be copied into the directory:
 
-- `~/.arduino15/packages/adafruit/hardware/samd/1.6.4/platform.txt`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.6.7/platform.txt`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -330,6 +339,30 @@ This file must be copied into the directory:
 - `~/.arduino15/packages/Seeeduino/hardware/samd/x.yy.zz/platform.txt`
 
 #### 7. For STM32 boards
+
+#### 7.1. For STM32 boards to use LAN8720
+
+To use LAN8720 on some STM32 boards 
+
+- **Nucleo-144 (F429ZI, NUCLEO_F746NG, NUCLEO_F746ZG, NUCLEO_F756ZG)**
+- **Discovery (DISCO_F746NG)**
+- **STM32F4 boards (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE_Mini, DIYMORE_F407VGT, FK407M1)**
+
+you have to copy the files [stm32f4xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/1.9.0/system/STM32F4xx) and [stm32f7xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/1.9.0/system/STM32F7xx) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/1.9.0/system) to overwrite the old files.
+
+Supposing the STM32 stm32 core version is 1.9.0. These files must be copied into the directory:
+
+- `~/.arduino15/packages/STM32/hardware/stm32/1.9.0/system/STM32F4xx/stm32f4xx_hal_conf_default.h` for STM32F4.
+- `~/.arduino15/packages/STM32/hardware/stm32/1.9.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
+
+Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
+theses files must be copied into the corresponding directory:
+
+- `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F4xx/stm32f4xx_hal_conf_default.h`
+- `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F7xx/stm32f7xx_hal_conf_default.h
+
+
+#### 7.2. For STM32 boards to use Serial1
 
 **To use Serial1 on some STM32 boards without Serial1 definition (Nucleo-144 NUCLEO_F767ZI, Nucleo-64 NUCLEO_L053R8, etc.) boards**, you have to copy the files [STM32 variant.h](Packages_Patches/STM32/hardware/stm32/1.9.0) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/1.9.0). You have to modify the files corresponding to your boards, this is just an illustration how to do.
 
@@ -375,6 +408,7 @@ Detects a multi reset so that an alternative start-up mode can be used. One exam
 * [ 7. WIOTerminal_WiFiManager](https://github.com/khoih-prog/WIOTerminal_WiFiManager)
 * [ 8. Ethernet_Manager](https://github.com/khoih-prog/Ethernet_Manager)
 * [ 9. Ethernet_Manager_STM32](https://github.com/khoih-prog/Ethernet_Manager_STM32)
+* [10. WiFiManager_Generic_Lite](https://github.com/khoih-prog/WiFiManager_Generic_Lite)
 
   
 ---
@@ -453,7 +487,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ada
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -475,7 +509,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -492,7 +526,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -509,7 +543,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -526,7 +560,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -543,7 +577,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -567,7 +601,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Tee
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -585,7 +619,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -600,7 +634,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -615,7 +649,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -630,7 +664,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -645,7 +679,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -667,7 +701,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***SAM
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xffff0000
 lowerBytes = 0x0, upperBytes = 0x0
@@ -682,7 +716,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -695,7 +729,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -708,7 +742,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -721,7 +755,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -734,7 +768,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -754,7 +788,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ard
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xffffffff
 lowerBytes = 0xffff, upperBytes = 0x0
@@ -770,7 +804,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -783,7 +817,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -796,7 +830,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -809,7 +843,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -822,7 +856,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.0.3
+MultiResetDetector_Generic v1.1.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -850,12 +884,13 @@ You can also see how [`ESP_DoubleResetDetector`](https://github.com/khoih-prog/E
 10. [Blynk_Async_GSM_Manager](https://github.com/khoih-prog/Blynk_Async_GSM_Manager),
 11. [ESP_WiFiManager](https://github.com/khoih-prog/ESP_WiFiManager)
 12. [ESPAsync_WiFiManager](https://github.com/khoih-prog/ESPAsync_WiFiManager)
-13. [WiFiManager_NINA_Lite](https://github.com/khoih-prog/WiFiManager_NINA_Lite)
+13. [WiFiManager_Generic_Lite](https://github.com/khoih-prog/WiFiManager_Generic_Lite)
 14. [BlynkEthernet_STM32_WM](https://github.com/khoih-prog/BlynkEthernet_STM32_WM),
 15. [ESP_AT_WM_Lite](https://github.com/khoih-prog/ESP_AT_WM_Lite)
 16. [WIOTerminal_WiFiManager](https://github.com/khoih-prog/WIOTerminal_WiFiManager)
 17. [Ethernet_Manager](https://github.com/khoih-prog/Ethernet_Manager)
 18. [Ethernet_Manager_STM32](https://github.com/khoih-prog/Ethernet_Manager_STM32)
+19. [ESP_WiFiManager_Lite](https://github.com/khoih-prog/ESP_WiFiManager_Lite)
 
 and the list is growing fast.
 
@@ -882,6 +917,11 @@ If you get compilation errors, more often than not, you may need to install a ne
 ---
 
 ### Releases
+
+### Major Releases v1.1.0
+
+1. Use new efficient [**FlashStorage_STM32** library](https://github.com/khoih-prog/FlashStorage_STM32). 
+2. Add support to new **STM32 core v2.0.0** and STM32L5
 
 ### Releases v1.0.3
 
@@ -912,7 +952,10 @@ Submit issues to: [MultiResetDetector_Generic issues](https://github.com/khoih-p
  6. Add support to Seeeduino SAMD21/SAMD51: LoRaWAN, Zero, Femto M0, XIAO M0, Wio GPS Board, Wio Terminal, Grove UI Wireless  using FlashStorage_SAMD.
  7. Add support to STM32F/L/H/G/WB/MP1 boards using EEPROM.
  8. Add support to Teensy boards using EEPROM.
- 8. Add support to AVR Mega, Nano, UNO, etc boards using EEPROM.
+ 9. Add support to AVR Mega, Nano, UNO, etc boards using EEPROM.
+10. Add support to STM32F/L/H/G/WB/MP1 boards using FlashStorage_STM32.
+11. Add support to STM32F/L/H/G/WB/MP1 boards using STM32 core v2.0.0
+
 
 ---
 ---
