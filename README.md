@@ -145,7 +145,7 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 - Nucleo-64
 - Discovery
 - Generic STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7 (with 64+K Flash): x8 and up
-- STM32L0, STM32L1, STM32L4, **STM32L4**
+- STM32L0, STM32L1, STM32L4, **STM32L5**
 - STM32G0, STM32G4
 - STM32H7
 - STM32WB
@@ -162,7 +162,7 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 ### Major Releases v1.1.0
 
 1. Use new efficient [**FlashStorage_STM32** library](https://github.com/khoih-prog/FlashStorage_STM32). 
-2. Add support to new **STM32 core v2.0.0** and STM32L5
+2. Add support to new **STM32 core v2.0.0** and **STM32L5**
 
 ### Releases v1.0.3
 
@@ -921,7 +921,7 @@ If you get compilation errors, more often than not, you may need to install a ne
 ### Major Releases v1.1.0
 
 1. Use new efficient [**FlashStorage_STM32** library](https://github.com/khoih-prog/FlashStorage_STM32). 
-2. Add support to new **STM32 core v2.0.0** and STM32L5
+2. Add support to new **STM32 core v2.0.0** and **STM32L5**
 
 ### Releases v1.0.3
 
@@ -954,7 +954,7 @@ Submit issues to: [MultiResetDetector_Generic issues](https://github.com/khoih-p
  8. Add support to Teensy boards using EEPROM.
  9. Add support to AVR Mega, Nano, UNO, etc boards using EEPROM.
 10. Add support to STM32F/L/H/G/WB/MP1 boards using FlashStorage_STM32.
-11. Add support to STM32F/L/H/G/WB/MP1 boards using STM32 core v2.0.0
+11. Add support to STM32F/L/H/G/WB/MP1 boards using **STM32 core v2.0.0**
 
 
 ---
