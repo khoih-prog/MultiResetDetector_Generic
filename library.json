@@ -1,8 +1,8 @@
 {
   "name": "MultiResetDetector_Generic",
-  "version": "1.1.0",
-  "keywords": "eeprom, flashstorage-samd, flashstorage-stm32, avr, teensy, sam-due, samd, stm32, nRF52, double-reset, multi-reset, detector, flashstorage, dueflashstorage, littlefs, spiffs, reset, data",
-  "description": "Library to detect a multi reset, using EEPROM, DueFlashStorage, FlashStorage or LittleFS/InternalFS for AVR, Teensy, SAM DUE, SAMD, STM32F/L/H/G/WB/MP1, nRF52 boards",
+  "version": "1.2.0",
+  "keywords": "device, control, eeprom, flashstorage-samd, flashstorage-stm32, rpi-pico, rp2040, raspberry-pico, teensy, sam-due, samd, stm32, nRF52, double-reset, multi-reset, detector, flashstorage, dueflashstorage, littlefs, spiffs, reset, data",
+  "description": "Library to detect a multi reset, using EEPROM, DueFlashStorage, FlashStorage_SAMD, FlashStorage_STM32 or LittleFS/InternalFS. For AVR, Teensy, SAM DUE, SAMD, STM32F/L/H/G/WB/MP1, nRF52, RP2040-based RASPBERRY_PI_PICO, etc. boards. Now using efficient FlashStorage_STM32 library and supporting new RP2040-based RASPBERRY_PI_PICO and STM32 core v2.0.0 as well as v1.9.0",
   "authors":
   {
     "name":  "Khoi Hoang",

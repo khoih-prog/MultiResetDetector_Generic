@@ -1,23 +1,24 @@
 /****************************************************************************************************************************
-   minimal.ino
-   Arduino AVR, Teensy, SAM-DUE, SAMD21/SAMD51, STM32F/L/H/G/WB/MP1, nRF52, etc. boards
+  minimal.ino
+  Arduino AVR, Teensy, SAM-DUE, SAMD21/SAMD51, STM32F/L/H/G/WB/MP1, nRF52, RASPBERRY_PI_PICO, etc. boards
 
-   MultiResetDetector_Generic is a library for the Arduino AVR, Teensy, SAM-DUE, SAMD, STM32, nRF52, etc. boards
-   to enable trigger configure mode by resetting the boards twice within configurable timeout seconds.
-   
-   1) DataCute    https://github.com/datacute/DoubleResetDetector
-   2) Khoi Hoang  https://github.com/khoih-prog/ESP_DoubleResetDetector
-   3) Khoi Hoang  https://github.com/khoih-prog/ESP_MultiResetDetector
-   4) Khoi Hoang  https://github.com/khoih-prog/DoubleResetDetector_Generic
+  MultiResetDetector_Generic is a library for the Arduino AVR, Teensy, SAM-DUE, SAMD, STM32, nRF52, RASPBERRY_PI_PICO, etc. boards
+  to enable trigger configure mode by resetting the boards twice within configurable timeout seconds.
 
-   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
-   Licensed under MIT license
-   Version: 1.1.0
+  1) DataCute    https://github.com/datacute/DoubleResetDetector
+  2) Khoi Hoang  https://github.com/khoih-prog/ESP_DoubleResetDetector
+  3) Khoi Hoang  https://github.com/khoih-prog/ESP_MultiResetDetector
+  4) Khoi Hoang  https://github.com/khoih-prog/DoubleResetDetector_Generic
 
-   Version Modified By   Date      Comments
-   ------- -----------  ---------- -----------
-   1.0.3   K Hoang      30/12/2020 Initial coding to support Multiple Reset Detection. Sync with DoubleResetDetector_Generic v1.0.3
-   1.1.0   K Hoang      27/04/2021 Use new FlashStorage_STM32 library. Add support to new STM32 core v2.0.0 and STM32L5
+  Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
+  Licensed under MIT license
+  Version: 1.2.0
+
+  Version Modified By   Date      Comments
+  ------- -----------  ---------- -----------
+  1.0.3   K Hoang      30/12/2020 Initial coding to support Multiple Reset Detection. Sync with DoubleResetDetector_Generic v1.0.3
+  1.1.0   K Hoang      27/04/2021 Use new FlashStorage_STM32 library. Add support to new STM32 core v2.0.0 and STM32L5
+  1.2.0   K Hoang      12/05/2021 Add support to RASPBERRY_PI_PICO
  *****************************************************************************************************************************/
 /****************************************************************************************************************************
    This example will open a configuration portal when the reset button is pressed twice.
@@ -69,7 +70,7 @@
 MultiResetDetector_Generic* mrd;
 
 #ifndef LED_BUILTIN
-#define LED_BUILTIN       13
+  #define LED_BUILTIN       13
 #endif
 
 void setup()
@@ -80,7 +81,13 @@ void setup()
   while (!Serial);
 
   Serial.println();
+
+#if defined(BOARD_NAME)
+  Serial.print(F("MultiResetDetector minimal Example Program on ")); Serial.println(BOARD_NAME);
+#else
   Serial.println(F("MultiResetDetector minimal Example Program"));
+#endif
+
   Serial.println(MULTIRESETDETECTOR_GENERIC_VERSION);
   Serial.println(F("-----------------------------------"));
 

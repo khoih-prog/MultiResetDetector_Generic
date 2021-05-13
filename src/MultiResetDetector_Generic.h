@@ -1,23 +1,24 @@
 /***********************************************************************************************************************************
-   MultiResetDetector_Generic.h
-   Arduino AVR, Teensy, SAM-DUE, SAMD21/SAMD51, STM32F/L/H/G/WB/MP1, nRF52, etc. boards
+  MultiResetDetector_Generic.h
+  Arduino AVR, Teensy, SAM-DUE, SAMD21/SAMD51, STM32F/L/H/G/WB/MP1, nRF52, RASPBERRY_PI_PICO, etc. boards
 
-   MultiResetDetector_Generic is a library for the Arduino AVR, Teensy, SAM-DUE, SAMD, STM32, nRF52, etc. boards
-   to enable trigger configure mode by resetting the boards twice within configurable timeout seconds.
-   
-   1) DataCute    https://github.com/datacute/DoubleResetDetector
-   2) Khoi Hoang  https://github.com/khoih-prog/ESP_DoubleResetDetector
-   3) Khoi Hoang  https://github.com/khoih-prog/ESP_MultiResetDetector
-   4) Khoi Hoang  https://github.com/khoih-prog/DoubleResetDetector_Generic
+  MultiResetDetector_Generic is a library for the Arduino AVR, Teensy, SAM-DUE, SAMD, STM32, nRF52, RASPBERRY_PI_PICO, etc. boards
+  to enable trigger configure mode by resetting the boards twice within configurable timeout seconds.
 
-   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
-   Licensed under MIT license
-   Version: 1.1.0
+  1) DataCute    https://github.com/datacute/DoubleResetDetector
+  2) Khoi Hoang  https://github.com/khoih-prog/ESP_DoubleResetDetector
+  3) Khoi Hoang  https://github.com/khoih-prog/ESP_MultiResetDetector
+  4) Khoi Hoang  https://github.com/khoih-prog/DoubleResetDetector_Generic
 
-   Version Modified By   Date      Comments
-   ------- -----------  ---------- -----------
-   1.0.3   K Hoang      30/12/2020 Initial coding to support Multiple Reset Detection. Sync with DoubleResetDetector_Generic v1.0.3
-   1.1.0   K Hoang      27/04/2021 Use new FlashStorage_STM32 library. Add support to new STM32 core v2.0.0 and STM32L5
+  Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
+  Licensed under MIT license
+  Version: 1.2.0
+
+  Version Modified By   Date      Comments
+  ------- -----------  ---------- -----------
+  1.0.3   K Hoang      30/12/2020 Initial coding to support Multiple Reset Detection. Sync with DoubleResetDetector_Generic v1.0.3
+  1.1.0   K Hoang      27/04/2021 Use new FlashStorage_STM32 library. Add support to new STM32 core v2.0.0 and STM32L5
+  1.2.0   K Hoang      12/05/2021 Add support to RASPBERRY_PI_PICO
  ************************************************************************************************************************************/
 
 #pragma once
@@ -25,7 +26,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.1.0"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.2.0"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -84,6 +85,18 @@
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use NRF52 and LittleFS / InternalFS
 
+#elif ( defined(ARDUINO_ARCH_RP2040) )
+
+  #if defined(MRD_GENERIC_USE_RP2040)
+    #undef MRD_GENERIC_USE_RP2040
+  #endif
+  #define MRD_GENERIC_USE_RP2040      true
+  #if defined(MRD_GENERIC_USE_EEPROM)
+    #undef MRD_GENERIC_USE_EEPROM
+  #endif
+  #define MRD_GENERIC_USE_EEPROM    false
+  #warning Use RP2040 (such as RASPBERRY_PI_PICO) and LittleFS
+
 #elif ( defined(STM32F0) || defined(STM32F1)  || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
         defined(STM32L0) || defined(STM32L1)  || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
         defined(STM32WB) || defined(STM32MP1) || defined(STM32L5) )
@@ -113,6 +126,7 @@
 #endif
  
 //default to use EEPROM, otherwise, use DueFlashStorage or FlashStorage_SAMD
+/////////////////////////////
 #if MRD_GENERIC_USE_EEPROM
   #include <EEPROM.h>
 
@@ -123,15 +137,19 @@
     #define MRD_EEPROM_SIZE     (E2END + 1)
   #endif
 
+/////////////////////////////
 #elif MRD_GENERIC_USE_SAMD
   // Include EEPROM-like API for FlashStorage
   //#include <FlashAsEEPROM.h>                //https://github.com/cmaglie/FlashStorage
   #include <FlashAsEEPROM_SAMD.h>             //https://github.com/khoih-prog/FlashStorage_SAMD
+
+/////////////////////////////  
 #elif MRD_GENERIC_USE_SAM_DUE
   //Use DueFlashStorage to simulate EEPROM
   #include <DueFlashStorage.h>                 //https://github.com/sebnil/DueFlashStorage
   DueFlashStorage dueFlashStorage;
-  
+
+/////////////////////////////  
 #elif MRD_GENERIC_USE_NRF52
   // Include LittleFS similar to SPIFFS
   #include <Adafruit_LittleFS.h>
@@ -140,6 +158,17 @@
   
   File MRD_file(InternalFS);
 
+/////////////////////////////
+#elif MRD_GENERIC_USE_RP2040
+
+  //Use LittleFS for RPI Pico
+  #include <FS.h>
+  #include <LittleFS.h>
+
+  FS* filesystem =      &LittleFS;
+  #define FileFS        LittleFS
+
+/////////////////////////////
 #elif MRD_GENERIC_USE_STM32
 
 /////////////////////////////////////////////
@@ -201,9 +230,14 @@
   #define MULTIRESETDETECTOR_GENERIC_FLAG_CLEAR  0x00000000     // Used when data corrupted, such as reformat LittleFS/SPIFFS
 #endif
 
+/////////////////////////////////////////////
+
 class MultiResetDetector_Generic
 {
   public:
+  
+    /////////////////////////////////////////////
+    
     MultiResetDetector_Generic(unsigned long timeout, int address)
     {
       mrd_times = MRD_TIMES;
@@ -212,7 +246,8 @@ class MultiResetDetector_Generic
       this->MRD_EEPROM_START = address;
       multiResetDetected = false;
       waitingForMultiReset = false;
-          
+
+/////////////////////////////          
 #if MRD_GENERIC_USE_EEPROM
 
       EEPROM.begin();
@@ -224,6 +259,7 @@ class MultiResetDetector_Generic
       Serial.println(MRD_EEPROM_START);
   #endif
 
+/////////////////////////////
 #elif (MRD_GENERIC_USE_STM32)
 
   #if defined(DATA_EEPROM_BASE)      
@@ -236,20 +272,40 @@ class MultiResetDetector_Generic
       Serial.print(", start = ");
       Serial.println(MRD_EEPROM_START);
   #endif
-          
+
+/////////////////////////////          
 #elif MRD_GENERIC_USE_SAMD
       // Do something to init FlashStorage
+      
+/////////////////////////////      
 #elif MRD_GENERIC_USE_SAM_DUE
       // Do something to init DueFlashStorage
-      
+
+/////////////////////////////      
 #elif MRD_GENERIC_USE_NRF52
       // Do something to init LittleFS / InternalFS
       // Initialize Internal File System
       InternalFS.begin();
+      
+/////////////////////////////      
+#elif MRD_GENERIC_USE_RP2040
+
+      bool beginOK = FileFS.begin();
+
+  #if (MRD_GENERIC_DEBUG)      
+      if (!beginOK)
+      {
+        Serial.println("\nLittleFS error");
+      }
+  #endif
+
+/////////////////////////////    
 #else
       #error Un-identifiable board selected. Please check your Tools->Board setting.
 #endif
     };
+    
+    /////////////////////////////////////////////
 
     bool detectMultiReset()
     {
@@ -278,6 +334,8 @@ class MultiResetDetector_Generic
       return multiResetDetected;
 
     };
+    
+    /////////////////////////////////////////////
 
     void loop()
     {
@@ -290,14 +348,20 @@ class MultiResetDetector_Generic
         stop();
       }
     };
+    
+    /////////////////////////////////////////////
 
     void stop()
     {
       clearRecentlyResetFlag();
       waitingForMultiReset = false;
     };
+    
+    /////////////////////////////////////////////
 
     bool multiResetDetected;
+    
+    /////////////////////////////////////////////
 
 
   private:
@@ -313,7 +377,10 @@ class MultiResetDetector_Generic
 
     /////////////////////////////////////////////////////////////////////
     
-#if (MRD_GENERIC_USE_SAMD)    
+#if (MRD_GENERIC_USE_SAMD)   
+
+    /////////////////////////////////////////////
+     
     uint32_t readFlagSAMD(void)
     {        
       uint16_t offset   = MRD_EEPROM_START;               
@@ -326,7 +393,13 @@ class MultiResetDetector_Generic
       
       return MULTIRESETDETECTOR_FLAG;
     }
+    
+    /////////////////////////////////////////////
+    
 #elif (MRD_GENERIC_USE_SAM_DUE)
+
+    /////////////////////////////////////////////
+    
     uint32_t readFlagSAM_DUE(void)
     {           
       byte* dataPointer = (byte* ) dueFlashStorage.readAddress(MRD_EEPROM_START);
@@ -335,7 +408,13 @@ class MultiResetDetector_Generic
       
       return MULTIRESETDETECTOR_FLAG;
     }
+    
+    /////////////////////////////////////////////
+    
 #elif MRD_GENERIC_USE_NRF52
+
+    /////////////////////////////////////////////
+
     uint32_t readFlagNRF52(void)
     {           
       MRD_file.open(MRD_FILENAME, FILE_O_READ);
@@ -345,44 +424,88 @@ class MultiResetDetector_Generic
         MRD_file.seek(MRD_FLAG_OFFSET);
         MRD_file.read((char *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG));
 
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
         Serial.print(F("LittleFS Flag read = 0x"));
         Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
-#endif
+  #endif
 
         MRD_file.close(); 
       }
       else
       {
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
         Serial.println(F("Loading MRD file failed"));
-#endif
+  #endif
       }
            
       return MULTIRESETDETECTOR_FLAG;
     }
+    
+    /////////////////////////////////////////////
+    
+#elif MRD_GENERIC_USE_RP2040
+
+    /////////////////////////////////////////////
+
+    uint32_t readFlagRP2040()
+    {           
+      File file = FileFS.open(MRD_FILENAME, "r");
+      
+      if (file)
+      {
+        file.seek(MRD_FLAG_OFFSET);
+        file.read((uint8_t *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG));
+
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("LittleFS Flag read = 0x" + String(MULTIRESETDETECTOR_FLAG, HEX) );
+  #endif
+
+        file.close(); 
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Loading MRD file failed");
+  #endif
+      }
+           
+      return MULTIRESETDETECTOR_FLAG;
+    }
+    
+    /////////////////////////////////////////////
+
 #endif
-    
-    /////////////////////////////////////////////////////////////////////
-    
+
+    /////////////////////////////////////////////
+       
     bool readRecentlyResetFlag()
     {
+    
+/////////////////////////////
 #if (MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
       EEPROM.get(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
       multiResetDetectorFlag = MULTIRESETDETECTOR_FLAG;
 
+/////////////////////////////
 #elif (MRD_GENERIC_USE_SAMD)
       // SAMD code  
       multiResetDetectorFlag = readFlagSAMD();
-         
+
+/////////////////////////////         
 #elif (MRD_GENERIC_USE_SAM_DUE)
       // SAM DUE code    
       multiResetDetectorFlag = readFlagSAM_DUE();
-      
+
+/////////////////////////////      
 #elif MRD_GENERIC_USE_NRF52
       // nRF52 code    
       multiResetDetectorFlag = readFlagNRF52(); 
-        
+
+/////////////////////////////      
+#elif MRD_GENERIC_USE_RP2040      
+      // RP2040 code    
+      multiResetDetectorFlag = readFlagRP2040(); 
+              
 #endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
       return true;
@@ -473,14 +596,16 @@ class MultiResetDetector_Generic
 
       multiResetDetectorFlag  = MULTIRESETDETECTOR_FLAG;
 
+/////////////////////////////
 #if (MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
       EEPROM.put(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
 
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       delay(1000);
       EEPROM.get(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
-#endif
+  #endif
 
+/////////////////////////////
 #elif (MRD_GENERIC_USE_SAMD)
       // SAMD code     
       uint16_t offset   = MRD_EEPROM_START;               
@@ -493,44 +618,75 @@ class MultiResetDetector_Generic
       
       EEPROM.commit();
       
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       delay(1000);
       readFlagSAMD();
-#endif      
+  #endif      
 
+/////////////////////////////
 #elif (MRD_GENERIC_USE_SAM_DUE)
       // SAM DUE code           
       dueFlashStorage.write(MRD_EEPROM_START, (byte *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG));
       
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       delay(1000);
       readFlagSAM_DUE();
-#endif
+  #endif
 
+/////////////////////////////
 #elif MRD_GENERIC_USE_NRF52
       // nRF52 code
       MRD_file.open(MRD_FILENAME, FILE_O_WRITE);
       
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       Serial.print(F("Saving MULTIRESETDETECTOR_FLAG to MRD file : 0x"));
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
-#endif
+  #endif
 
       if (MRD_file)
       {
         MRD_file.seek(MRD_FLAG_OFFSET);
         MRD_file.write((uint8_t *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG));
         MRD_file.close();
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
         Serial.println(F("Saving MRD file OK"));
-#endif
+  #endif
       }
       else
       {
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
         Serial.println(F("Saving MRD file failed"));
-#endif
-      }      
+  #endif
+      }
+      
+/////////////////////////////    
+#elif MRD_GENERIC_USE_RP2040
+
+      // RP2040 code
+      File file = FileFS.open(MRD_FILENAME, "w");  
+      
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("Saving MULTIRESETDETECTOR_FLAG to MRD file : 0x");
+      Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
+  #endif
+
+      if (file)
+      {
+        file.seek(MRD_FLAG_OFFSET);
+        file.write((uint8_t *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG));
+        file.close();
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving MRD file OK");
+  #endif
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving MRD file failed");
+  #endif
+      }
+
+/////////////////////////////                  
 #endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
 #if (MRD_GENERIC_DEBUG)
@@ -546,14 +702,16 @@ class MultiResetDetector_Generic
       multiResetDetectorFlag  = flagValue;
       MULTIRESETDETECTOR_FLAG = flagValue;
 
+/////////////////////////////
 #if (MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
       EEPROM.put(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
 
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       delay(1000);
       EEPROM.get(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
-#endif
+  #endif
 
+/////////////////////////////
 #elif (MRD_GENERIC_USE_SAMD)
       // SAMD code     
       uint16_t offset   = MRD_EEPROM_START;               
@@ -566,28 +724,30 @@ class MultiResetDetector_Generic
       
       EEPROM.commit();
       
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       delay(1000);
       readFlagSAMD();
-#endif      
+  #endif      
 
+/////////////////////////////
 #elif (MRD_GENERIC_USE_SAM_DUE)
       // SAM DUE code           
       dueFlashStorage.write(MRD_EEPROM_START, (byte *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG));
       
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       delay(1000);
       readFlagSAM_DUE();
-#endif
+  #endif
 
+/////////////////////////////
 #elif MRD_GENERIC_USE_NRF52
 
       // nRF52 code
       MRD_file.open(MRD_FILENAME, FILE_O_WRITE);
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
       Serial.print(F("Saving to MRD file : 0x"));
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
-#endif
+  #endif
 
       if (MRD_file)
       {
@@ -595,19 +755,52 @@ class MultiResetDetector_Generic
         MRD_file.write((uint8_t *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG)); 
    
         MRD_file.close();
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
         Serial.println(F("Saving MRD file OK"));
-#endif
+  #endif
       }
       else
       {
-#if (MRD_GENERIC_DEBUG)
+  #if (MRD_GENERIC_DEBUG)
         Serial.println(F("Saving MRD file failed"));
-#endif
+  #endif
       }   
       
       delay(1000);
       readFlagNRF52();
+
+/////////////////////////////
+#elif MRD_GENERIC_USE_RP2040
+
+      // RP2040 code
+      File file = FileFS.open(MRD_FILENAME, "w");
+      
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("Saving to MRD file : 0x");
+      Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
+  #endif
+
+      if (file)
+      {
+        file.seek(MRD_FLAG_OFFSET);
+        file.write((uint8_t *) &MULTIRESETDETECTOR_FLAG, sizeof(MULTIRESETDETECTOR_FLAG)); 
+   
+        file.close();
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving MRD file OK");
+  #endif
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving MRD file failed");
+  #endif
+      }   
+      
+      delay(1000);
+      readFlagRP2040();
+
+/////////////////////////////
       
 #endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
@@ -615,8 +808,6 @@ class MultiResetDetector_Generic
       Serial.print(F("ClearFlag write = 0x"));
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
 #endif
-
-//#endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
     };
 
 };
