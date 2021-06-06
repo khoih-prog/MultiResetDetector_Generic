@@ -12,7 +12,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.3.0
+  Version: 1.4.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -20,6 +20,7 @@
   1.1.0   K Hoang      27/04/2021 Use new FlashStorage_STM32 library. Add support to new STM32 core v2.0.0 and STM32L5
   1.2.0   K Hoang      12/05/2021 Add support to RASPBERRY_PI_PICO using Arduino-pico core
   1.3.0   K Hoang      28/05/2021 Add support to Nano_RP2040_Connect, RASPBERRY_PI_PICO using RP2040 Arduino mbed core
+  1.4.0   K Hoang      05/06/2021 Permit more control over LittleFS for RP2040 Arduino mbed core
  ************************************************************************************************************************************/
 
 #pragma once
@@ -27,7 +28,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.3.0"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.4.0"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -47,6 +48,7 @@
 
 #define MRD_GENERIC_USE_EEPROM      true
 
+/////////////////////////////
 #if ( defined(ARDUINO_SAM_DUE) || defined(__SAM3X8E__) )
   #if defined(MRD_GENERIC_USE_SAM_DUE)
     #undef MRD_GENERIC_USE_SAM_DUE
@@ -57,6 +59,8 @@
   #endif
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use SAM-DUE and DueFlashStorage
+  
+/////////////////////////////  
 #elif ( defined(ARDUINO_SAMD_ZERO) || defined(ARDUINO_SAMD_MKR1000) || defined(ARDUINO_SAMD_MKRWIFI1010) \
    || defined(ARDUINO_SAMD_NANO_33_IOT) || defined(ARDUINO_SAMD_MKRFox1200) || defined(ARDUINO_SAMD_MKRWAN1300) \
    || defined(ARDUINO_SAMD_MKRWAN1310) || defined(ARDUINO_SAMD_MKRGSM1400) || defined(ARDUINO_SAMD_MKRNB1500) \
@@ -71,7 +75,8 @@
   #endif
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use SAMD and FlashStorage
-  
+
+///////////////////////////// 
 #elif ( defined(NRF52840_FEATHER) || defined(NRF52832_FEATHER) || defined(NRF52_SERIES) || defined(ARDUINO_NRF52_ADAFRUIT) || \
         defined(NRF52840_FEATHER_SENSE) || defined(NRF52840_ITSYBITSY) || defined(NRF52840_CIRCUITPLAY) || defined(NRF52840_CLUE) || \
         defined(NRF52840_METRO) || defined(NRF52840_PCA10056) || defined(PARTICLE_XENON) | defined(NINA_B302_ublox) )    
@@ -86,30 +91,52 @@
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use NRF52 and LittleFS / InternalFS
 
+/////////////////////////////
 #elif ( defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED) )
 
   #if defined(MRD_GENERIC_USE_RP2040)
     #undef MRD_GENERIC_USE_RP2040
   #endif
   #define MRD_GENERIC_USE_RP2040      true
+  
   #if defined(MRD_GENERIC_USE_EEPROM)
     #undef MRD_GENERIC_USE_EEPROM
   #endif
   #define MRD_GENERIC_USE_EEPROM    false
+  
   #warning Use RP2040 (such as RASPBERRY_PI_PICO) and LittleFS
 
+/////////////////////////////
 #elif ( defined(ARDUINO_ARCH_RP2040) && defined(ARDUINO_ARCH_MBED) )
 
+  // For Arduino' arduino-mbed core
+  // To check and determine if we need to init LittleFS here
+  #if MBED_RP2040_INITIALIZED
+    #define MRD_MBED_LITTLEFS_NEED_INIT     false
+    #warning MBED_RP2040_INITIALIZED in another place
+  #else
+    // Better to delay until init done
+    #if defined(MBED_RP2040_INITIALIZED)
+      #undef MBED_RP2040_INITIALIZED
+    #endif
+    #define MBED_RP2040_INITIALIZED           true
+    
+    #define MRD_MBED_LITTLEFS_NEED_INIT     true
+  #endif
+  
   #if defined(MRD_GENERIC_USE_MBED_RP2040)
     #undef MRD_GENERIC_USE_MBED_RP2040
   #endif
   #define MRD_GENERIC_USE_MBED_RP2040      true
+  
   #if defined(MRD_GENERIC_USE_EEPROM)
     #undef MRD_GENERIC_USE_EEPROM
   #endif
   #define MRD_GENERIC_USE_EEPROM    false
-  #warning Use MBED RP2040 (such as NANO_RP2040_CONNECT, RASPBERRY_PI_PICO) and LittleFS
   
+  #warning Use MBED RP2040 (such as NANO_RP2040_CONNECT, RASPBERRY_PI_PICO) and LittleFS
+
+/////////////////////////////  
 #elif ( defined(STM32F0) || defined(STM32F1)  || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
         defined(STM32L0) || defined(STM32L1)  || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
         defined(STM32WB) || defined(STM32MP1) || defined(STM32L5) )
@@ -122,7 +149,8 @@
   #endif
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use STM32 and FlashStorage_STM32
-  
+
+/////////////////////////////  
 #else
   #if defined(CORE_TEENSY)
     #warning Use TEENSY and EEPROM
@@ -137,6 +165,8 @@
     #warning Use Unknown board and EEPROM
   #endif  
 #endif
+
+/////////////////////////////
  
 //default to use EEPROM, otherwise, use DueFlashStorage or FlashStorage_SAMD
 /////////////////////////////
@@ -182,7 +212,7 @@
   #define FileFS        LittleFS
   
 /////////////////////////////
-#elif MRD_GENERIC_USE_MBED_RP2040
+#elif (MRD_GENERIC_USE_MBED_RP2040 && MRD_MBED_LITTLEFS_NEED_INIT)
 
   //Use LittleFS for MBED RPI Pico
   #include "FlashIAPBlockDevice.h"
@@ -200,11 +230,11 @@
   #endif
 
   #if !defined(RP2040_FS_LOCATION_END)
-  #define RP2040_FS_LOCATION_END    RP2040_FLASH_SIZE
+    #define RP2040_FS_LOCATION_END    RP2040_FLASH_SIZE
   #endif
 
   #if !defined(RP2040_FS_SIZE_KB)
-    // Using default 16KB for LittleFS
+    // Using default 64KB for LittleFS
     #define RP2040_FS_SIZE_KB       (64)
   #endif
 
@@ -214,6 +244,8 @@
 
   #if !defined(FORCE_REFORMAT)
     #define FORCE_REFORMAT            false
+  #elif FORCE_REFORMAT
+    #warning FORCE_REFORMAT enable. Are you sure ?
   #endif
 
   FlashIAPBlockDevice bd(XIP_BASE + RP2040_FS_START, (RP2040_FS_SIZE_KB * 1024));
@@ -224,6 +256,8 @@
     #undef MRD_FILENAME
   #endif
   #define  MRD_FILENAME     "/fs/mrd.dat"  
+  
+  #warning MRD_MBED_LITTLEFS INITIALIZED locally in MultiResetDetector_Generic
 
 /////////////////////////////
 #elif MRD_GENERIC_USE_STM32
@@ -357,7 +391,7 @@ class MultiResetDetector_Generic
   #endif
   
 /////////////////////////////
-#elif MRD_GENERIC_USE_MBED_RP2040
+#elif (MRD_GENERIC_USE_MBED_RP2040 && MRD_MBED_LITTLEFS_NEED_INIT)
 
       Serial.print("LittleFS size (KB) = ");
       Serial.println(RP2040_FS_SIZE_KB);

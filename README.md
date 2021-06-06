@@ -15,6 +15,7 @@
   * [Features](#features)
   * [Currently supported Boards](#currently-supported-boards)
 * [Changelog](#changelog)
+  * [Major Releases v1.4.0](#major-releases-v140)
   * [Major Releases v1.3.0](#major-releases-v130)
   * [Major Releases v1.2.0](#major-releases-v120)
   * [Major Releases v1.1.0](#major-releases-v110)
@@ -196,6 +197,10 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 
 ## Changelog
 
+### Major Releases v1.4.0
+
+1. Permit more control over LittleFS for RP2040 Arduino mbed core, such as `FORCE_REFORMAT`, `MBED_RP2040_INITIALIZED`, `MRD_MBED_LITTLEFS_NEED_INIT`.
+
 ### Major Releases v1.3.0
 
 1. Add support to RP2040-based boards, such as **Nano RP2040 Connect**, using [**Arduino mbed OS for Nano boards**](https://github.com/arduino/ArduinoCore-mbed) and LittleFS.
@@ -220,7 +225,7 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 
 ## Prerequisites
 
- 1. [`Arduino IDE 1.8.13+` for Arduino](https://www.arduino.cc/en/Main/Software)
+ 1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
  2. [`Arduino Core for STM32 v2.0.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
  3. [`Teensy core 1.53+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
  4. [`Arduino SAM DUE core 1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards
@@ -228,12 +233,12 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
  6. [`Adafruit SAMD core 1.7.2+`](https://www.adafruit.com/) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
  7. [`Seeeduino SAMD core 1.8.1+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
  8. [`Adafruit nRF52 v0.22.1+`](https://www.adafruit.com) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
- 9. [`Earle Philhower's arduino-pico core v1.6.0+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+ 9. [`Earle Philhower's arduino-pico core v1.7.0+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 10. [`Arduino mbed_rp2040 core 2.1.0+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest) 
 11. [`FlashStorage_SAMD library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, NANO_33_IOT, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.). [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_SAMD.svg)](https://github.com/khoih-prog/FlashStorage_SAMD/releases/latest)
 12. [`FlashStorage_STM32 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32)
 13. [`DueFlashStorage library v1.0.0+`](https://github.com/sebnil/DueFlashStorage) for SAM DUE. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DueFlashStorage.svg?)](https://www.ardu-badge.com/DueFlashStorage)
-14. [`Adafruit's LittleFS/InternalFS`](www.adafruit.com) for nRF52. Already included if you already installed Adafruit **nRF52 board package** from Boards Manager.
+
 
 ---
 ---
@@ -574,7 +579,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ada
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -596,7 +601,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -613,7 +618,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -630,7 +635,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -647,7 +652,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -664,7 +669,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -688,7 +693,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Tee
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -706,7 +711,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -721,7 +726,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -736,7 +741,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -751,7 +756,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -766,7 +771,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -788,7 +793,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***SAM
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xffff0000
 lowerBytes = 0x0, upperBytes = 0x0
@@ -803,7 +808,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -816,7 +821,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -829,7 +834,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -842,7 +847,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -855,7 +860,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -875,7 +880,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ard
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xffffffff
 lowerBytes = 0xffff, upperBytes = 0x0
@@ -891,7 +896,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -904,7 +909,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -917,7 +922,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -930,7 +935,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -943,7 +948,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -963,7 +968,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **STM3
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -981,7 +986,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -996,7 +1001,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1011,7 +1016,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1026,7 +1031,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1041,7 +1046,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1063,7 +1068,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **RASP
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 
 Loading MRD file failed
@@ -1087,7 +1092,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -1104,7 +1109,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -1121,7 +1126,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -1138,7 +1143,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -1155,7 +1160,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -1179,7 +1184,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **Nano
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1204,7 +1209,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1223,7 +1228,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1242,7 +1247,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1261,7 +1266,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1280,7 +1285,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1306,7 +1311,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1331,7 +1336,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1350,7 +1355,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1369,7 +1374,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1388,7 +1393,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1407,7 +1412,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.3.0
+MultiResetDetector_Generic v1.4.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1473,6 +1478,10 @@ If you get compilation errors, more often than not, you may need to install a ne
 ---
 
 ### Releases
+
+### Major Releases v1.4.0
+
+1. Permit more control over LittleFS for RP2040 Arduino mbed core, such as `FORCE_REFORMAT`, `MBED_RP2040_INITIALIZED`, `MRD_MBED_LITTLEFS_NEED_INIT`.
 
 ### Major Releases v1.3.0
 
