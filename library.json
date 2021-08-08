@@ -1,8 +1,8 @@
 {
   "name": "MultiResetDetector_Generic",
-  "version": "1.4.0",
-  "keywords": "device, control, eeprom, flashstorage-samd, flashstorage-stm32, rpi-pico, rp2040, raspberry-pico, nano-rp2040-connect, teensy, sam-due, samd, stm32, nRF52, multi-reset, flashstorage, dueflashstorage, littlefs, spiffs, double-reset, reset, detector, data",
-  "description": "Library to detect a multi reset, using EEPROM, DueFlashStorage, FlashStorage_SAMD, FlashStorage_STM32 or LittleFS/InternalFS. For AVR, Teensy, SAM DUE, SAMD, STM32F/L/H/G/WB/MP1, nRF52, RP2040-based Nano_RP2040_Connect, RASPBERRY_PI_PICO, etc. boards. Now using efficient FlashStorage_STM32 library and supporting new RP2040-based Nano_RP2040_Connect, RASPBERRY_PI_PICO and STM32 core v2.0.0 as well as v1.9.0",
+  "version": "1.5.0",
+  "keywords": "device, control, eeprom, flashstorage-samd, flashstorage-rtl8720, flashstorage-stm32, rpi-pico, rp2040, rtl8720, nano-rp2040-connect, teensy, sam-due, samd, stm32, nRF52, multi-reset, flashstorage, dueflashstorage, littlefs, spiffs, double-reset, reset, detector, data",
+  "description": "Library to detect a multi reset, using EEPROM, DueFlashStorage, FlashStorage_SAMD, FlashStorage_RTL8720, FlashStorage_STM32 or LittleFS/InternalFS. For AVR, Teensy, SAM DUE, SAMD, STM32F/L/H/G/WB/MP1, nRF52, RP2040-based Nano_RP2040_Connect, RASPBERRY_PI_PICO, RTL8720DN, etc. boards. Now using efficient FlashStorage_STM32 library and supporting new RP2040-based Nano_RP2040_Connect, RASPBERRY_PI_PICO and STM32 core v2.0.0",
   "authors":
   {
     "name":  "Khoi Hoang",
@@ -35,6 +35,12 @@
       "name": "FlashStorage_SAMD",
       "version": "^1.1.0",
       "platforms": ["*"]
+    },
+    {
+      "owner": "khoih.prog",
+      "name": "FlashStorage_RTL8720",
+      "version": "^1.0.0",
+      "platforms": "*"
     }
   ],
   "frameworks": "*",

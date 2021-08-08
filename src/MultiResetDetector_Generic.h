@@ -12,7 +12,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.4.0
+  Version: 1.5.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -21,6 +21,7 @@
   1.2.0   K Hoang      12/05/2021 Add support to RASPBERRY_PI_PICO using Arduino-pico core
   1.3.0   K Hoang      28/05/2021 Add support to Nano_RP2040_Connect, RASPBERRY_PI_PICO using RP2040 Arduino mbed core
   1.4.0   K Hoang      05/06/2021 Permit more control over LittleFS for RP2040 Arduino mbed core
+  1.5.0   K Hoang      07/08/2021 Add support to RTL8720DN, etc. using AmebaD core
  ************************************************************************************************************************************/
 
 #pragma once
@@ -28,7 +29,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.4.0"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.5.0"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -47,6 +48,16 @@
 #endif
 
 #define MRD_GENERIC_USE_EEPROM      true
+
+///////////////////////////// 
+
+#define MRD_GENERIC_USE_SAM_DUE     false
+#define MRD_GENERIC_USE_SAMD        false
+#define MRD_GENERIC_USE_STM32       false
+#define MRD_GENERIC_USE_NRF52       false
+#define MRD_GENERIC_USE_RP2040      false
+#define MRD_GENERIC_USE_MBED_RP2040 false
+#define MRD_GENERIC_USE_RTL8720     false
 
 /////////////////////////////
 #if ( defined(ARDUINO_SAM_DUE) || defined(__SAM3X8E__) )
@@ -150,6 +161,19 @@
   #define MRD_GENERIC_USE_EEPROM    false
   #warning Use STM32 and FlashStorage_STM32
 
+/////////////////////////////
+#elif defined(CONFIG_PLATFORM_8721D)
+
+  #if defined(MRD_GENERIC_USE_RTL8720)
+    #undef MRD_GENERIC_USE_RTL8720
+  #endif
+  #define MRD_GENERIC_USE_RTL8720      true
+  #if defined(MRD_GENERIC_USE_EEPROM)
+    #undef MRD_GENERIC_USE_EEPROM
+  #endif
+  #define MRD_GENERIC_USE_EEPROM    false
+  #warning Use RTL8720 and FlashStorage_RTL8720
+  
 /////////////////////////////  
 #else
   #if defined(CORE_TEENSY)
@@ -283,6 +307,11 @@
 
   //////////////////////////////////////////////
  
+#elif MRD_GENERIC_USE_RTL8720
+  // Include FlashStorage API for FlashStorage_RTL8720
+  #include <FlashStorage_RTL8720.h>             //https://github.com/khoih-prog/FlashStorage_RTL8720
+
+///////////////////////////// 
    
 #endif    //#if MRD_GENERIC_USE_EEPROM
 
@@ -422,6 +451,10 @@ class MultiResetDetector_Generic
       }
   #endif  
 
+/////////////////////////////        
+#elif MRD_GENERIC_USE_RTL8720
+      // Do something to init FlashStorage_RTL8720
+      
 /////////////////////////////    
 #else
       #error Un-identifiable board selected. Please check your Tools->Board setting.
@@ -628,6 +661,19 @@ class MultiResetDetector_Generic
     
     /////////////////////////////////////////////
 
+#elif (MRD_GENERIC_USE_RTL8720)
+
+    /////////////////////////////////////////////
+
+    uint32_t readFlagRTL8720()
+    {             
+      // Using name MRD_EEPROM_START, but actually FlashStorage not EEPROM
+      FlashStorage.get(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
+      
+      return MULTIRESETDETECTOR_FLAG;
+    }
+    
+    /////////////////////////////////////////////
 
 #endif
 
@@ -667,7 +713,12 @@ class MultiResetDetector_Generic
 
       // MBED RP2040 code    
       multiResetDetectorFlag = readFlagMbedRP2040();
-                    
+
+/////////////////////////////
+#elif (MRD_GENERIC_USE_RTL8720)
+      // RTL8720 code  
+      multiResetDetectorFlag = readFlagRTL8720();
+                          
 #endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
       return true;
@@ -875,6 +926,17 @@ class MultiResetDetector_Generic
         Serial.println("Saving MRD file failed");
   #endif
       }
+      
+/////////////////////////////
+#elif (MRD_GENERIC_USE_RTL8720)
+      // RTL8720 code           
+      FlashStorage.put(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
+           
+  #if (MRD_GENERIC_DEBUG)
+      delay(1000);
+      readFlagRTL8720();
+  #endif
+        
 /////////////////////////////                  
 #endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)
 
@@ -1021,6 +1083,19 @@ class MultiResetDetector_Generic
       
       delay(1000);
       readFlagMbedRP2040();
+      
+/////////////////////////////
+
+#elif (MRD_GENERIC_USE_RTL8720)
+     
+      // RTL8720 code           
+      FlashStorage.put(MRD_EEPROM_START, MULTIRESETDETECTOR_FLAG);
+           
+  #if (MRD_GENERIC_DEBUG)
+      delay(1000);
+      readFlagRTL8720();
+  #endif  
+      
 /////////////////////////////
       
 #endif    //(MRD_GENERIC_USE_EEPROM || MRD_GENERIC_USE_STM32)

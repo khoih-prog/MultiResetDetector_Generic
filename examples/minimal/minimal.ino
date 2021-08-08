@@ -12,7 +12,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.4.0
+  Version: 1.5.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -21,6 +21,7 @@
   1.2.0   K Hoang      12/05/2021 Add support to RASPBERRY_PI_PICO using Arduino-pico core
   1.3.0   K Hoang      28/05/2021 Add support to Nano_RP2040_Connect, RASPBERRY_PI_PICO using RP2040 Arduino mbed core
   1.4.0   K Hoang      05/06/2021 Permit more control over LittleFS for RP2040 Arduino mbed core
+  1.5.0   K Hoang      07/08/2021 Add support to RTL8720DN, etc. using AmebaD core
  *****************************************************************************************************************************/
 /****************************************************************************************************************************
    This example will open a configuration portal when the reset button is pressed twice.
@@ -31,11 +32,13 @@
    Save data in EPPROM from address 1020, size 1024 bytes (both configurable)
    Note: Teensy 4.0 has only 1080 bytes of EEPROM-simulated Flash
    2) SAMD
-   Save data in EEPROM-simulated FlashStorage from address 1020 (configurable to avoid conflict)
+   Save data in EEPROM-simulated FlashStorage from address 0 (configurable to avoid conflict)
    3) SAM DUE
    Save data in DueFlashStorage from address 1020 (configurable to avoid conflict)
-   3) Adafruit nRF52-based boards
-   Save data in InternalFS, fle "/mrd.dat" location 0
+   4) Adafruit nRF52-based boards
+   Save data in InternalFS, fle "/drd.dat" location 0
+   5) RTL8720
+   Save data in FlashStorage from address 0 (configurable to avoid conflict)
 
    So when the device starts up it checks the InternalFS file "/mrd.dat", EEPROM or (Due)FlashStorage for a flag to see if it has been
    recently reset within the configurable timeout seconds
