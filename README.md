@@ -15,6 +15,7 @@
   * [Features](#features)
   * [Currently supported Boards](#currently-supported-boards)
 * [Changelog](#changelog)
+  * [Major Releases v1.6.0](#major-releases-v160)
   * [Major Releases v1.5.0](#major-releases-v150)
   * [Major Releases v1.4.0](#major-releases-v140)
   * [Major Releases v1.3.0](#major-releases-v130)
@@ -108,6 +109,7 @@
     * [ 8.4 Reset Detected => Reporting 3](#84-reset-detected--reporting-3)
     * [ 8.5 Reset Detected => Reporting 4](#85-reset-detected--reporting-4)
     * [ 8.6 Reset Detected => Reporting 5. Multi Reset Detected](#86-reset-detected--reporting-5-multi-reset-detected)
+  * [9. minimal on MBED Nano_33_BLE using LittleFS](#9-minimal-on-mbed-nano_33_ble-using-littlefs)
 * [Libraries using ESP_DoubleResetDetector or DoubleResetDetector_Generic library](#libraries-using-esp_doubleresetdetector-or-doubleresetdetector_generic-library)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
@@ -126,7 +128,7 @@
 
 #### Features
 
-[**MultiResetDetector_Generic**](https://github.com/khoih-prog/MultiResetDetector_Generic) is a library for the **Arduino AVR, Teensy, SAM DUE, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, nRF52, RASPBERRY_PI_PICO, RTL8720DN, etc.** boards to detects a **multi reset, within configurable timeout (default 10s) seconds**, so that an alternative start-up mode can be used. Example use cases are to allow re-configuration of a device's WiFi / MQTT / Blynk credentials or to count the number of resets within a pre-determined timed.
+[**MultiResetDetector_Generic**](https://github.com/khoih-prog/MultiResetDetector_Generic) is a library for the **Arduino AVR, Teensy, SAM DUE, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, nRF52, RASPBERRY_PI_PICO, RTL8720DN, Nano_33_BLE, etc.** boards to detects a **multi reset, within configurable timeout (default 10s) seconds**, so that an alternative start-up mode can be used. Example use cases are to allow re-configuration of a device's WiFi / MQTT / Blynk credentials or to count the number of resets within a pre-determined timed.
 
 The **RP2040-based boards, such as Nano RP2040 Connect, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, are currently supported using [Earle Philhower's arduino-pico core](https://github.com/earlephilhower/arduino-pico) or [**Arduino mbed OS for RP2040/Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
 
@@ -137,7 +139,7 @@ This library is based on, modified, bug-fixed and improved from
 3. [`Khoi Hoang's ESP_MultiResetDetector`](https://github.com/khoih-prog/ESP_MultiResetDetector)
 4. [`Khoi Hoang's DoubleResetDetector_Generic`](https://github.com/khoih-prog/DoubleResetDetector_Generic) 
 
-to add support for AVR, Teensy, SAM DUE, SAMD, STM32, nRF52, RTL8720DN, RP2040-based boards, etc.
+to add support for AVR, Teensy, SAM DUE, SAMD, STM32, nRF52, RTL8720DN, RP2040-based boards, Nano_33_BLE, etc.
 
 Currently, [`DoubleResetDetector`](https://github.com/datacute/DoubleResetDetector) only supports ESP8266 using RTC memory,  [`ESP_DoubleResetDetector`](https://github.com/khoih-prog/ESP_DoubleResetDetector) and [`ESP_MultiResetDetector`](https://github.com/khoih-prog/ESP_MultiResetDetector) only ESP8266 and ESP32, [`DoubleResetDetector_Generic`](https://github.com/khoih-prog/DoubleResetDetector_Generic) only for double reset detection.
  
@@ -150,6 +152,8 @@ This library can be used to detect a multi reset within a predetermined time to 
 5. LittleFS for RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [Earle Philhower's arduino-pico core](https://github.com/earlephilhower/arduino-pico)
 6. LittleFS for RP2040-based boards, such as **Nano RP2040 Connect, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [**Arduino mbed OS for RP2040/Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
 7. [`FlashStorage_RTL8720 library`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc.
+8. LittleFS for MBED nRF52840-based boards, such as **Nano_33_BLE, Nano_33_BLE_Sense** using [**Arduino mbed OS for Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
+
 
 ---
 
@@ -197,10 +201,17 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 10. RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** v2.1.0+ core](https://github.com/arduino/ArduinoCore-mbed)
 
 11. Realtek **RTL8720DN, RTL8722DM, RTL8722CSM, etc.**, using [`Arduino AmebaD core`](https://github.com/ambiot/ambd_arduino)
- 
+
+12. **MBED nRF52840-based boards such as Nano_33_BLE, Nano_33_BLE_Sense**, etc. using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed)
+
+
 ---
 
 ## Changelog
+
+### Major Releases v1.6.0
+
+1. Add support to **MBED nRF52840-based boards such as Nano_33_BLE, Nano_33_BLE_Sense**, etc. using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed)
 
 ### Major Releases v1.5.0
 
@@ -236,20 +247,21 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 
  1. [`Arduino IDE 1.8.15+` for Arduino](https://www.arduino.cc/en/Main/Software)
  2. [`Arduino Core for STM32 v2.0.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
- 3. [`Teensy core 1.53+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
+ 3. [`Teensy core 1.54+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
  4. [`Arduino SAM DUE core 1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards
  5. [`Arduino SAMD core 1.8.11+`](https://www.arduino.cc/en/Guide/ArduinoM0) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
- 6. [`Adafruit SAMD core 1.7.3+`](https://www.adafruit.com/) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
+ 6. [`Adafruit SAMD core 1.7.4+`](https://www.adafruit.com/) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
  7. [`Seeeduino SAMD core 1.8.1+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
- 8. [`Adafruit nRF52 v0.24.0+`](https://www.adafruit.com) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
- 9. [`Earle Philhower's arduino-pico core v1.9.3+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
-10. [`Arduino mbed_rp2040 core 2.3.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest) 
-11. [`Arduino AmebaD core 3.0.8+`](https://github.com/ambiot/ambd_arduino) for Realtek RTL8720DN, RTL8722DM and RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/ambiot/ambd_arduino.svg)](https://github.com/ambiot/ambd_arduino/releases/latest)
+ 8. [`Adafruit nRF52 v1.0.0+`](https://www.adafruit.com) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
+ 9. [`Earle Philhower's arduino-pico core v1.9.4+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+10. [`Arduino mbed_rp2040 core 2.4.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+11. [`Arduino mbed_nano core 2.4.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) MBED nRF52840-based boards such as **Nano_33_BLE, Nano_33_BLE_Sense**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest) 
+12. [`Arduino AmebaD core 3.0.8+`](https://github.com/ambiot/ambd_arduino) for Realtek RTL8720DN, RTL8722DM and RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/ambiot/ambd_arduino.svg)](https://github.com/ambiot/ambd_arduino/releases/latest)
 
-12. [`FlashStorage_SAMD library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, NANO_33_IOT, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.). [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_SAMD.svg)](https://github.com/khoih-prog/FlashStorage_SAMD/releases/latest)
-13. [`FlashStorage_STM32 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32)
-14. [`DueFlashStorage library v1.0.0+`](https://github.com/sebnil/DueFlashStorage) for SAM DUE. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DueFlashStorage.svg?)](https://www.ardu-badge.com/DueFlashStorage)
-15. [`FlashStorage_RTL8720 library v1.0.0+`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_RTL8720.svg)](https://github.com/khoih-prog/FlashStorage_RTL8720/releases/latest)
+13. [`FlashStorage_SAMD library v1.2.0+`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, NANO_33_IOT, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.). [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_SAMD.svg)](https://github.com/khoih-prog/FlashStorage_SAMD/releases/latest)
+14. [`FlashStorage_STM32 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32)
+15. [`DueFlashStorage library v1.0.0+`](https://github.com/sebnil/DueFlashStorage) for SAM DUE. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DueFlashStorage.svg?)](https://www.ardu-badge.com/DueFlashStorage)
+16. [`FlashStorage_RTL8720 library v1.0.0+`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_RTL8720.svg)](https://github.com/khoih-prog/FlashStorage_RTL8720/releases/latest)
 
 
 ---
@@ -284,16 +296,16 @@ Another way to install is to:
 
 #### 1. For Adafruit nRF52840 and nRF52832 boards
 
-**To be able to compile, run and automatically detect and display BOARD_NAME on nRF52840/nRF52832 boards**, you have to copy the whole [nRF52 0.21.1](Packages_Patches/adafruit/hardware/nrf52/0.21.1) directory into Adafruit nRF52 directory (~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1). 
+**To be able to compile, run and automatically detect and display BOARD_NAME on nRF52840/nRF52832 boards**, you have to copy the whole [nRF52 1.0.0](Packages_Patches/adafruit/hardware/nrf52/1.0.0) directory into Adafruit nRF52 directory (~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0). 
 
-Supposing the Adafruit nRF52 version is 0.21.1. These files must be copied into the directory:
-- `~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/platform.txt`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/boards.txt`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/variants/NINA_B302_ublox/variant.h`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/variants/NINA_B302_ublox/variant.cpp`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/variants/NINA_B112_ublox/variant.h`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/variants/NINA_B112_ublox/variant.cpp`
-- **`~/.arduino15/packages/adafruit/hardware/nrf52/0.21.1/cores/nRF5/Udp.h`**
+Supposing the Adafruit nRF52 version is 1.0.0. These files must be copied into the directory:
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/platform.txt`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/boards.txt`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/variants/NINA_B302_ublox/variant.h`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/variants/NINA_B302_ublox/variant.cpp`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/variants/NINA_B112_ublox/variant.h`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/variants/NINA_B112_ublox/variant.cpp`
+- **`~/.arduino15/packages/adafruit/hardware/nrf52/1.0.0/cores/nRF5/Udp.h`**
 
 Whenever a new version is installed, remember to copy these files into the new version directory. For example, new version is x.yy.z
 These files must be copied into the directory:
@@ -591,7 +603,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ada
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -613,7 +625,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -630,7 +642,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -647,7 +659,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -664,7 +676,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -681,7 +693,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -705,7 +717,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Tee
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -723,7 +735,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -738,7 +750,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -753,7 +765,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -768,7 +780,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -783,7 +795,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -805,7 +817,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***SAM
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xffff0000
 lowerBytes = 0x0, upperBytes = 0x0
@@ -820,7 +832,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -833,7 +845,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -846,7 +858,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -859,7 +871,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -872,7 +884,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -892,7 +904,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ard
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xffffffff
 lowerBytes = 0xffff, upperBytes = 0x0
@@ -908,7 +920,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -921,7 +933,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -934,7 +946,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -947,7 +959,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -960,7 +972,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -980,7 +992,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **STM3
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -998,7 +1010,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1013,7 +1025,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1028,7 +1040,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1043,7 +1055,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1058,7 +1070,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1080,7 +1092,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **RASP
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 
 Loading MRD file failed
@@ -1104,7 +1116,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -1121,7 +1133,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -1138,7 +1150,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -1155,7 +1167,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -1172,7 +1184,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -1196,7 +1208,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **Nano
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1221,7 +1233,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1240,7 +1252,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1259,7 +1271,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1278,7 +1290,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1297,7 +1309,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1323,7 +1335,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1348,7 +1360,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1367,7 +1379,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1386,7 +1398,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1405,7 +1417,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1424,7 +1436,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.4.0
+MultiResetDetector_Generic v1.6.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1438,6 +1450,144 @@ LittleFS Flag read = 0xfffe0001
 ClearFlag write = 0xfffe0001
 Multi Reset Detected
 ```
+
+---
+
+### 9. minimal on MBED Nano_33_BLE using LittleFS
+
+This is terminal debug output when running [minimal](examples/minimal) on **MBED Nano_33_BLE using LittleFS**. MRD_TIMES is set at 5 and MRD_TIMEOUT at 10 seconds.
+
+
+#### 9.1 Data Corrupted => reset to 0
+
+```
+MultiResetDetector minimal Example Program on Nano 33 BLE
+MultiResetDetector_Generic v1.6.0
+-----------------------------------
+LittleFS size (KB) = 64
+LittleFS Mount OK
+LittleFS Flag read = 0xd0d01234
+multiResetDetectorFlag = 0xd0d01234
+lowerBytes = 0x1234, upperBytes = 0x2f2f
+lowerBytes = 0x1234, upperBytes = 0x2f2f
+detectRecentlyResetFlag: Data corrupted. Reset to 0
+Saving to DRD file : 0xffff0000
+Saving DRD file OK
+LittleFS Flag read = 0xffff0000
+ClearFlag write = 0xffff0000
+No multiResetDetected, number of times = 0
+LittleFS Flag read = 0xffff0000
+Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffe0001
+Saving DRD file OK
+SetFlag write = 0xfffe0001
+No Multi Reset Detected
+Stop multiResetDetecting
+Saving to DRD file : 0xfffe0001
+Saving DRD file OK
+LittleFS Flag read = 0xfffe0001
+ClearFlag write = 0xfffe0001
+```
+
+#### 9.2 Reset Detected => Reporting 1
+
+```
+MultiResetDetector minimal Example Program on Nano 33 BLE
+MultiResetDetector_Generic v1.6.0
+-----------------------------------
+LittleFS size (KB) = 64
+LittleFS Mount OK
+LittleFS Flag read = 0xfffe0001
+multiResetDetectorFlag = 0xfffe0001
+lowerBytes = 0x1, upperBytes = 0x1
+No multiResetDetected, number of times = 1
+LittleFS Flag read = 0xfffe0001
+Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffd0002
+Saving DRD file OK
+SetFlag write = 0xfffd0002
+No Multi Reset Detected
+```
+
+#### 9.3 Reset Detected => Reporting 2
+
+```
+MultiResetDetector minimal Example Program on Nano 33 BLE
+MultiResetDetector_Generic v1.6.0
+-----------------------------------
+LittleFS size (KB) = 64
+LittleFS Mount OK
+LittleFS Flag read = 0xfffd0002
+multiResetDetectorFlag = 0xfffd0002
+lowerBytes = 0x2, upperBytes = 0x2
+No multiResetDetected, number of times = 2
+LittleFS Flag read = 0xfffd0002
+Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffc0003
+Saving DRD file OK
+SetFlag write = 0xfffc0003
+No Multi Reset Detected
+Stop multiResetDetecting
+Saving to DRD file : 0xfffe0001
+Saving DRD file OK
+LittleFS Flag read = 0xfffe0001
+ClearFlag write = 0xfffe0001
+```
+
+#### 9.4 Reset Detected => Reporting 3
+
+```
+MultiResetDetector minimal Example Program on Nano 33 BLE
+MultiResetDetector_Generic v1.6.0
+-----------------------------------
+LittleFS size (KB) = 64
+LittleFS Mount OK
+LittleFS Flag read = 0xfffc0003
+multiResetDetectorFlag = 0xfffc0003
+lowerBytes = 0x3, upperBytes = 0x3
+No multiResetDetected, number of times = 3
+LittleFS Flag read = 0xfffc0003
+Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffb0004
+Saving DRD file OK
+SetFlag write = 0xfffb0004
+No Multi Reset Detected
+```
+
+#### 9.5 Reset Detected => Reporting 4
+
+```
+MultiResetDetector minimal Example Program on Nano 33 BLE
+MultiResetDetector_Generic v1.6.0
+-----------------------------------
+LittleFS size (KB) = 64
+LittleFS Mount OK
+LittleFS Flag read = 0xfffb0004
+multiResetDetectorFlag = 0xfffb0004
+lowerBytes = 0x4, upperBytes = 0x4
+No multiResetDetected, number of times = 4
+LittleFS Flag read = 0xfffb0004
+Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffa0005
+Saving DRD file OK
+SetFlag write = 0xfffa0005
+No Multi Reset Detected
+```
+
+#### 9.6 Reset Detected => Reporting 5. Multi Reset Detected
+
+```
+MultiResetDetector minimal Example Program on Nano 33 BLE
+MultiResetDetector_Generic v1.6.0
+-----------------------------------
+LittleFS size (KB) = 64
+LittleFS Mount OK
+LittleFS Flag read = 0xfffa0005
+multiResetDetectorFlag = 0xfffa0005
+lowerBytes = 0x5, upperBytes = 0x5
+multiResetDetected, number of times = 5
+Saving to DRD file : 0xfffe0001
+Saving DRD file OK
+LittleFS Flag read = 0xfffe0001
+ClearFlag write = 0xfffe0001
+Multi Reset Detected
+```
+
 ---
 ---
 
@@ -1490,6 +1640,10 @@ If you get compilation errors, more often than not, you may need to install a ne
 ---
 
 ### Releases
+
+### Major Releases v1.6.0
+
+1. Add support to **MBED nRF52840-based boards such as Nano_33_BLE, Nano_33_BLE_Sense**, etc. using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed)
 
 ### Major Releases v1.5.0
 
@@ -1549,6 +1703,8 @@ Submit issues to: [MultiResetDetector_Generic issues](https://github.com/khoih-p
 13. Add support to RP2040-based boards, such as **Nano RP2040 Connect**, using [**Arduino mbed OS for Nano boards**](https://github.com/arduino/ArduinoCore-mbed) and LittleFS.
 14. Add support to RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) and LittleFS.
 15. Add support to Realtek **RTL8720DN, RTL8722DM, RTL8722CSM, etc.**, using [**Arduino AmebaD core**](https://github.com/ambiot/ambd_arduino)
+16. Add support to **MBED nRF52840-based boards such as Nano_33_BLE, Nano_33_BLE_Sense**, etc. using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed)
+
 
 ---
 ---

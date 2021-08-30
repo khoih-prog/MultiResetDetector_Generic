@@ -12,7 +12,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.5.0
+  Version: 1.6.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -22,6 +22,7 @@
   1.3.0   K Hoang      28/05/2021 Add support to Nano_RP2040_Connect, RASPBERRY_PI_PICO using RP2040 Arduino mbed core
   1.4.0   K Hoang      05/06/2021 Permit more control over LittleFS for RP2040 Arduino mbed core
   1.5.0   K Hoang      07/08/2021 Add support to RTL8720DN, etc. using AmebaD core
+  1.6.0   K Hoang      29/08/2021 Add support to MBED Nano_33_BLE, Nano_33_BLE_Sense, etc. using LittleFS
  ************************************************************************************************************************************/
 
 #pragma once
@@ -29,7 +30,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.5.0"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.6.0"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -57,6 +58,7 @@
 #define MRD_GENERIC_USE_NRF52       false
 #define MRD_GENERIC_USE_RP2040      false
 #define MRD_GENERIC_USE_MBED_RP2040 false
+#define MRD_GENERIC_USE_NANO33BLE   false
 #define MRD_GENERIC_USE_RTL8720     false
 
 /////////////////////////////
@@ -90,7 +92,8 @@
 ///////////////////////////// 
 #elif ( defined(NRF52840_FEATHER) || defined(NRF52832_FEATHER) || defined(NRF52_SERIES) || defined(ARDUINO_NRF52_ADAFRUIT) || \
         defined(NRF52840_FEATHER_SENSE) || defined(NRF52840_ITSYBITSY) || defined(NRF52840_CIRCUITPLAY) || defined(NRF52840_CLUE) || \
-        defined(NRF52840_METRO) || defined(NRF52840_PCA10056) || defined(PARTICLE_XENON) | defined(NINA_B302_ublox) )    
+        defined(NRF52840_METRO) || defined(NRF52840_PCA10056) || defined(PARTICLE_XENON) | defined(NINA_B302_ublox) ) && \
+        ! ( defined(ARDUINO_ARCH_MBED) )
 
   #if defined(MRD_GENERIC_USE_NRF52)
     #undef MRD_GENERIC_USE_NRF52
@@ -147,6 +150,36 @@
   
   #warning Use MBED RP2040 (such as NANO_RP2040_CONNECT, RASPBERRY_PI_PICO) and LittleFS
 
+///////////////////////////// 
+#elif ( defined(ARDUINO_ARCH_NRF52840) && defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARDUINO_NANO33BLE) )
+
+  // For Arduino' arduino-mbed core
+  // To check and determine if we need to init LittleFS here
+  #if NANO33BLE_INITIALIZED
+    #define MRD_NANO33BLE_NEED_INIT     false
+    #warning NANO33BLE_INITIALIZED in another place
+  #else
+    // Better to delay until init done
+    #if defined(NANO33BLE_INITIALIZED)
+      #undef NANO33BLE_INITIALIZED
+    #endif
+    #define NANO33BLE_INITIALIZED           true
+    
+    #define MRD_NANO33BLE_NEED_INIT     true
+  #endif
+  
+  #if defined(MRD_GENERIC_USE_NANO33BLE)
+    #undef MRD_GENERIC_USE_NANO33BLE
+  #endif
+  #define MRD_GENERIC_USE_NANO33BLE      true
+  
+  #if defined(MRD_GENERIC_USE_EEPROM)
+    #undef MRD_GENERIC_USE_EEPROM
+  #endif
+  #define MRD_GENERIC_USE_EEPROM    false
+  
+  #warning Use MBED nRF52840 (such as Nano_33_BLE, Nano_33_BLE_Sense) and LittleFS
+  
 /////////////////////////////  
 #elif ( defined(STM32F0) || defined(STM32F1)  || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
         defined(STM32L0) || defined(STM32L1)  || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
@@ -283,6 +316,63 @@
   
   #warning MRD_MBED_LITTLEFS INITIALIZED locally in MultiResetDetector_Generic
 
+
+/////////////////////////////
+#elif (MRD_GENERIC_USE_NANO33BLE && MRD_NANO33BLE_NEED_INIT)
+
+  //Use LittleFS for MBED Nano33BLE
+  #include "FlashIAPBlockDevice.h"
+  #include "LittleFileSystem.h"
+  #include "mbed.h"
+
+  #include <stdio.h>
+  #include <errno.h>
+  #include <functional>
+
+  #include "BlockDevice.h"
+
+  #if !defined(NANO33BLE_FLASH_SIZE)
+    // Using max 512KB for FS
+    #define NANO33BLE_FLASH_SIZE         (1 * 1024 * 1024)
+  #endif
+
+  #if !defined(NANO33BLE_FS_LOCATION_END)
+    #define NANO33BLE_FS_LOCATION_END    NANO33BLE_FLASH_SIZE
+  #endif
+
+  #if !defined(NANO33BLE_FS_SIZE_KB)
+    // Using default 64KB for FS
+    #define NANO33BLE_FS_SIZE_KB       (64)
+  #endif
+
+  #if !defined(NANO33BLE_FS_START)
+    #define NANO33BLE_FS_START           (NANO33BLE_FLASH_SIZE - (NANO33BLE_FS_SIZE_KB * 1024))
+  #endif
+
+  #if !defined(FORCE_REFORMAT)
+    #define FORCE_REFORMAT            false
+  #elif FORCE_REFORMAT
+    #warning FORCE_REFORMAT enable. Are you sure ?
+  #endif
+
+  // nRF52840 flash address from 0, length 1MB.
+  // Better to use max half of flash for LitleFS, must be 0x80000 (512KB)
+  // FLASH_BASE must be 0x80000, or crash !!!????
+  #define FLASH_BASE            0x80000
+
+  FlashIAPBlockDevice wholeBD(FLASH_BASE, 0x80000);
+  FlashIAPBlockDevice bd(FLASH_BASE, (NANO33BLE_FS_SIZE_KB * 1024));
+  
+  mbed::LittleFileSystem fs("littlefs");
+  
+  #if defined(MRD_FILENAME)
+    #undef MRD_FILENAME
+  #endif
+  #define  MRD_FILENAME     "/littlefs/drd.dat"
+  
+  #warning MRD_NANO33BLE_LITTLEFS INITIALIZED locally in MultiResetDetector_Generic
+  
+  
 /////////////////////////////
 #elif MRD_GENERIC_USE_STM32
 
@@ -449,7 +539,43 @@ class MultiResetDetector_Generic
       {
         Serial.println("\nLittleFS error");
       }
-  #endif  
+  #endif
+  
+/////////////////////////////
+#elif (MRD_GENERIC_USE_NANO33BLE && MRD_NANO33BLE_NEED_INIT)
+
+      Serial.print("LittleFS size (KB) = ");
+      Serial.println(NANO33BLE_FS_SIZE_KB);
+  
+#if FORCE_REFORMAT
+      mbed::LittleFileSystem::format(&bd);
+#endif  
+      
+      int err = fs.mount(&bd);
+      
+  #if (MRD_GENERIC_DEBUG) 
+      Serial.println(err ? "LittleFS Mount Fail" : "LittleFS Mount OK");
+  #endif
+  
+      if (err)
+      {
+  #if (MRD_GENERIC_DEBUG)     
+        // Reformat if we can't mount the filesystem
+        Serial.println("Formatting... ");
+  #endif
+  
+        err = mbed::LittleFileSystem::format(&bd);
+      }
+  
+      bool beginOK = (err == 0);
+
+  #if (MRD_GENERIC_DEBUG)      
+      if (!beginOK)
+      {
+        Serial.println("\nLittleFS error");
+      }
+  #endif
+    
 
 /////////////////////////////        
 #elif MRD_GENERIC_USE_RTL8720
@@ -658,7 +784,38 @@ class MultiResetDetector_Generic
            
       return MULTIRESETDETECTOR_FLAG;
     }
-    
+
+    /////////////////////////////////////////////
+
+#elif MRD_GENERIC_USE_NANO33BLE
+
+    /////////////////////////////////////////////
+
+    uint32_t readFlagNano33BLE()
+    {           
+      FILE *file = fopen(MRD_FILENAME, "r");
+      
+      if (file)
+      {
+        fseek(file, MRD_FLAG_OFFSET, SEEK_SET);
+        fread((uint8_t *) &MULTIRESETDETECTOR_FLAG, 1, sizeof(MULTIRESETDETECTOR_FLAG), file);
+
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("LittleFS Flag read = 0x" + String(MULTIRESETDETECTOR_FLAG, HEX) );
+  #endif
+
+        fclose(file);
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Loading DRD file failed");
+  #endif
+      }
+           
+      return MULTIRESETDETECTOR_FLAG;
+    }    
+        
     /////////////////////////////////////////////
 
 #elif (MRD_GENERIC_USE_RTL8720)
@@ -714,6 +871,12 @@ class MultiResetDetector_Generic
       // MBED RP2040 code    
       multiResetDetectorFlag = readFlagMbedRP2040();
 
+/////////////////////////////
+#elif MRD_GENERIC_USE_NANO33BLE
+
+      // MBED Nano_33_BLE code    
+      multiResetDetectorFlag = readFlagNano33BLE();
+      
 /////////////////////////////
 #elif (MRD_GENERIC_USE_RTL8720)
       // RTL8720 code  
@@ -926,7 +1089,36 @@ class MultiResetDetector_Generic
         Serial.println("Saving MRD file failed");
   #endif
       }
+
+
+/////////////////////////////
+#elif MRD_GENERIC_USE_NANO33BLE
+
+      // Mbed Nano_33_BLE code
+      FILE *file = fopen(MRD_FILENAME, "w");
       
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("Saving MULTIRESETDETECTOR_FLAG to DRD file : 0x");
+      Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
+  #endif
+
+      if (file)
+      {
+        fseek(file, MRD_FLAG_OFFSET, SEEK_SET);
+        fwrite((uint8_t *) &MULTIRESETDETECTOR_FLAG, 1, sizeof(MULTIRESETDETECTOR_FLAG), file);
+        
+        fclose(file);
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file OK");
+  #endif
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file failed");
+  #endif
+      }
+            
 /////////////////////////////
 #elif (MRD_GENERIC_USE_RTL8720)
       // RTL8720 code           
@@ -1083,7 +1275,40 @@ class MultiResetDetector_Generic
       
       delay(1000);
       readFlagMbedRP2040();
+
+
+/////////////////////////////
+#elif MRD_GENERIC_USE_NANO33BLE
+
+      // Mbed Nano_33_BLE code
+      FILE *file = fopen(MRD_FILENAME, "w");
       
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("Saving to DRD file : 0x");
+      Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
+  #endif
+
+      if (file)
+      {       
+        fseek(file, MRD_FLAG_OFFSET, SEEK_SET);
+        fwrite((uint8_t *) &MULTIRESETDETECTOR_FLAG, 1, sizeof(MULTIRESETDETECTOR_FLAG), file);
+        
+        fclose(file);
+        
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file OK");
+  #endif
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file failed");
+  #endif
+      }   
+      
+      delay(1000);
+      readFlagNano33BLE();
+            
 /////////////////////////////
 
 #elif (MRD_GENERIC_USE_RTL8720)
