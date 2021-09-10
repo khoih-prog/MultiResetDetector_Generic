@@ -12,7 +12,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.6.0
+  Version: 1.7.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -23,6 +23,7 @@
   1.4.0   K Hoang      05/06/2021 Permit more control over LittleFS for RP2040 Arduino mbed core
   1.5.0   K Hoang      07/08/2021 Add support to RTL8720DN, etc. using AmebaD core
   1.6.0   K Hoang      29/08/2021 Add support to MBED Nano_33_BLE, Nano_33_BLE_Sense, etc. using LittleFS
+  1.7.0   K Hoang      10/09/2021 Add support to MBED Portenta_H7 using LittleFS
  ************************************************************************************************************************************/
 
 #pragma once
@@ -30,7 +31,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.6.0"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.7.0"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -60,6 +61,7 @@
 #define MRD_GENERIC_USE_MBED_RP2040 false
 #define MRD_GENERIC_USE_NANO33BLE   false
 #define MRD_GENERIC_USE_RTL8720     false
+#define MRD_GENERIC_USE_PORTENTA    false
 
 /////////////////////////////
 #if ( defined(ARDUINO_SAM_DUE) || defined(__SAM3X8E__) )
@@ -150,6 +152,48 @@
   
   #warning Use MBED RP2040 (such as NANO_RP2040_CONNECT, RASPBERRY_PI_PICO) and LittleFS
 
+///////////////////////////// 
+#elif ( ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) ) && defined(ARDUINO_ARCH_MBED) )
+
+  #if defined(BOARD_NAME)
+    #undef BOARD_NAME
+  #endif
+
+  #if defined(CORE_CM7)
+    #warning Using Portenta H7 M7 core
+    #define BOARD_NAME              "PORTENTA_H7_M7"
+  #else
+    #warning Using Portenta H7 M4 core
+    #define BOARD_NAME              "PORTENTA_H7_M4"
+  #endif
+  
+  // For Arduino' arduino-mbed core
+  // To check and determine if we need to init LittleFS here
+  #if MBED_PORTENTA_H7_INITIALIZED
+    #define MRD_MBED_LITTLEFS_NEED_INIT     false
+    #warning MBED_PORTENTA_H7_INITIALIZED in another place
+  #else
+    // Better to delay until init done
+    #if defined(MBED_PORTENTA_H7_INITIALIZED)
+      #undef MBED_PORTENTA_H7_INITIALIZED
+    #endif
+    #define MBED_PORTENTA_H7_INITIALIZED          true
+    
+    #define MRD_PORTENTA_LITTLEFS_NEED_INIT       true
+  #endif
+  
+  #if defined(MRD_GENERIC_USE_MBED_PORTENTA)
+    #undef MRD_GENERIC_USE_MBED_PORTENTA
+  #endif
+  #define MRD_GENERIC_USE_MBED_PORTENTA           true
+   
+  #if defined(MRD_GENERIC_USE_EEPROM)
+    #undef MRD_GENERIC_USE_EEPROM
+  #endif
+  #define MRD_GENERIC_USE_EEPROM    false
+  
+  #warning Use MBED PORTENTA_H7 and LittleFS
+  
 ///////////////////////////// 
 #elif ( defined(ARDUINO_ARCH_NRF52840) && defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARDUINO_NANO33BLE) )
 
@@ -316,7 +360,41 @@
   
   #warning MRD_MBED_LITTLEFS INITIALIZED locally in MultiResetDetector_Generic
 
+/////////////////////////////
+#elif (MRD_GENERIC_USE_MBED_PORTENTA && MRD_PORTENTA_LITTLEFS_NEED_INIT)
 
+  //Use LittleFS for MBED Portenta
+  #include "FlashIAPBlockDevice.h"
+  #include "LittleFileSystem.h"
+  #include "mbed.h"
+
+  #include <stdio.h>
+  #include <errno.h>
+  #include <functional>
+
+  #include "BlockDevice.h"
+  
+  #include "mbed_portenta/FlashIAPLimits.h"
+
+  #if !defined(FORCE_REFORMAT)
+    #define FORCE_REFORMAT            false
+  #elif FORCE_REFORMAT
+    #warning FORCE_REFORMAT enable. Are you sure ?
+  #endif
+
+  static FlashIAPBlockDevice* blockDevicePtr;
+
+  mbed::LittleFileSystem fs("littlefs");
+  
+  struct FlashIAPLimits _flashIAPLimits;
+  
+  #if defined(MRD_FILENAME)
+    #undef MRD_FILENAME
+  #endif
+  #define  MRD_FILENAME     "/littlefs/mrd.dat"
+  
+  #warning MRD_PORTENTA_LITTLEFS INITIALIZED locally in MultiResetDetector_Generic
+  
 /////////////////////////////
 #elif (MRD_GENERIC_USE_NANO33BLE && MRD_NANO33BLE_NEED_INIT)
 
@@ -514,6 +592,10 @@ class MultiResetDetector_Generic
 
       Serial.print("LittleFS size (KB) = ");
       Serial.println(RP2040_FS_SIZE_KB);
+
+#if FORCE_REFORMAT
+      fs.reformat(&bd);
+#endif
       
       int err = fs.mount(&bd);
       
@@ -540,6 +622,57 @@ class MultiResetDetector_Generic
         Serial.println("\nLittleFS error");
       }
   #endif
+
+
+/////////////////////////////
+#elif (MRD_GENERIC_USE_MBED_PORTENTA && MRD_PORTENTA_LITTLEFS_NEED_INIT)
+
+      // Get limits of the the internal flash of the microcontroller
+      _flashIAPLimits = getFlashIAPLimits();
+      
+      Serial.print("Flash Size: (KB) = "); Serial.println(_flashIAPLimits.flash_size / 1024.0);
+      Serial.print("FlashIAP Start Address: = 0x"); Serial.println(_flashIAPLimits.start_address, HEX);
+      Serial.print("LittleFS size (KB) = "); Serial.println(_flashIAPLimits.available_size / 1024.0);
+            
+      blockDevicePtr = new FlashIAPBlockDevice(_flashIAPLimits.start_address, _flashIAPLimits.available_size);
+      
+      if (!blockDevicePtr)
+      {
+  #if (MRD_GENERIC_DEBUG)       
+        Serial.println("Error init FlashIAPBlockDevice");
+  #endif      
+        return;
+      }
+      
+  #if FORCE_REFORMAT
+      fs.reformat(blockDevicePtr);
+  #endif
+
+      int err = fs.mount(blockDevicePtr);
+      
+  #if (MRD_GENERIC_DEBUG) 
+      Serial.println(err ? "LittleFS Mount Fail" : "LittleFS Mount OK");
+  #endif
+  
+      if (err)
+      {
+  #if (MRD_GENERIC_DEBUG)     
+        // Reformat if we can't mount the filesystem
+        Serial.println("Formatting... ");
+  #endif
+  
+        err = fs.reformat(blockDevicePtr);
+      }
+  
+      bool beginOK = (err == 0);
+
+  #if (MRD_GENERIC_DEBUG)      
+      if (!beginOK)
+      {
+        Serial.println("\nLittleFS error");
+      }
+  #endif
+
   
 /////////////////////////////
 #elif (MRD_GENERIC_USE_NANO33BLE && MRD_NANO33BLE_NEED_INIT)
@@ -785,6 +918,39 @@ class MultiResetDetector_Generic
       return MULTIRESETDETECTOR_FLAG;
     }
 
+
+    /////////////////////////////////////////////
+    
+#elif (MRD_GENERIC_USE_MBED_PORTENTA)
+
+    /////////////////////////////////////////////
+    
+    uint32_t readFlagMbedPortenta()
+    {           
+      FILE *file = fopen(MRD_FILENAME, "r");
+      
+      if (file)
+      {
+        fseek(file, MRD_FLAG_OFFSET, SEEK_SET);
+        fread((uint8_t *) &MULTIRESETDETECTOR_FLAG, 1, sizeof(MULTIRESETDETECTOR_FLAG), file);
+
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("LittleFS Flag read = 0x" + String(MULTIRESETDETECTOR_FLAG, HEX) );
+  #endif
+
+        fclose(file);
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Loading DRD file failed");
+  #endif
+      }
+           
+      return MULTIRESETDETECTOR_FLAG;
+    } 
+    
+    
     /////////////////////////////////////////////
 
 #elif MRD_GENERIC_USE_NANO33BLE
@@ -871,6 +1037,12 @@ class MultiResetDetector_Generic
       // MBED RP2040 code    
       multiResetDetectorFlag = readFlagMbedRP2040();
 
+/////////////////////////////
+#elif (MRD_GENERIC_USE_MBED_PORTENTA)
+
+      // MBED Portenta code    
+      multiResetDetectorFlag = readFlagMbedPortenta();
+    
 /////////////////////////////
 #elif MRD_GENERIC_USE_NANO33BLE
 
@@ -1092,6 +1264,35 @@ class MultiResetDetector_Generic
 
 
 /////////////////////////////
+#elif (MRD_GENERIC_USE_MBED_PORTENTA)
+
+      // Mbed Portenta code
+      FILE *file = fopen(MRD_FILENAME, "w");
+      
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("Saving MULTIRESETDETECTOR_FLAG to DRD file : 0x");
+      Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
+  #endif
+
+      if (file)
+      {
+        fseek(file, MRD_FLAG_OFFSET, SEEK_SET);
+        fwrite((uint8_t *) &MULTIRESETDETECTOR_FLAG, 1, sizeof(MULTIRESETDETECTOR_FLAG), file);
+        
+        fclose(file);
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file OK");
+  #endif
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file failed");
+  #endif
+      }
+      
+      
+/////////////////////////////
 #elif MRD_GENERIC_USE_NANO33BLE
 
       // Mbed Nano_33_BLE code
@@ -1275,6 +1476,39 @@ class MultiResetDetector_Generic
       
       delay(1000);
       readFlagMbedRP2040();
+
+
+/////////////////////////////
+#elif (MRD_GENERIC_USE_MBED_PORTENTA)
+
+      // Mbed Portenta code
+      FILE *file = fopen(MRD_FILENAME, "w");
+      
+  #if (MRD_GENERIC_DEBUG)
+      Serial.print("Saving to DRD file : 0x");
+      Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
+  #endif
+
+      if (file)
+      {       
+        fseek(file, MRD_FLAG_OFFSET, SEEK_SET);
+        fwrite((uint8_t *) &MULTIRESETDETECTOR_FLAG, 1, sizeof(MULTIRESETDETECTOR_FLAG), file);
+        
+        fclose(file);
+        
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file OK");
+  #endif
+      }
+      else
+      {
+  #if (MRD_GENERIC_DEBUG)
+        Serial.println("Saving DRD file failed");
+  #endif
+      }   
+      
+      delay(1000);
+      readFlagMbedPortenta();
 
 
 /////////////////////////////
