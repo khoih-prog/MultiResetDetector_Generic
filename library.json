@@ -1,6 +1,6 @@
 {
   "name": "MultiResetDetector_Generic",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "keywords": "device, control, flashstorage-samd, flashstorage-stm32, nano-rp2040-connect, nano-33-ble, samd, stm32, nRF52, portenta-h7, rp2040, multi-reset, flashstorage, mbed-portenta, portenta-h7, portentah7, dueflashstorage, littlefs, spiffs, mbed-portenta, teensy, sam-due, mbed, rpi-pico, raspberry-pico, flashstorage-rtl8720, eeprom, reset, detector, data",
   "description": "Library to detect a multi reset, using EEPROM, DueFlashStorage, FlashStorage_SAMD, FlashStorage_RTL8720, FlashStorage_STM32 or LittleFS/InternalFS. For AVR, Teensy, SAM DUE, SAMD, STM32F/L/H/G/WB/MP1, nRF52, RP2040-based Nano_RP2040_Connect, RASPBERRY_PI_PICO, RTL8720DN, MBED nRF52840-based Nano_33_BLE, Portenta_H7, etc. boards. Now using efficient FlashStorage_STM32 library and supporting new RP2040-based Nano_RP2040_Connect, RASPBERRY_PI_PICO and STM32 core v2.0.0",
   "authors":

@@ -14,7 +14,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
   
-  Version: 1.7.1
+  Version: 1.7.2
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -27,6 +27,7 @@
   1.6.0   K Hoang      29/08/2021 Add support to MBED Nano_33_BLE, Nano_33_BLE_Sense, etc. using LittleFS
   1.7.0   K Hoang      10/09/2021 Add support to MBED Portenta_H7 using LittleFS
   1.7.1   K Hoang      13/09/2021 Select fix LittleFS size of 1024KB
+  1.7.2   K Hoang      14/09/2021 Back to using auto LittleFS to fix bug
 *****************************************************************************************************************************/
 
 #pragma once
