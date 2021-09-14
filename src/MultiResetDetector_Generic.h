@@ -12,7 +12,8 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.7.0
+  
+  Version: 1.7.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -24,6 +25,7 @@
   1.5.0   K Hoang      07/08/2021 Add support to RTL8720DN, etc. using AmebaD core
   1.6.0   K Hoang      29/08/2021 Add support to MBED Nano_33_BLE, Nano_33_BLE_Sense, etc. using LittleFS
   1.7.0   K Hoang      10/09/2021 Add support to MBED Portenta_H7 using LittleFS
+  1.7.1   K Hoang      13/09/2021 Select fix LittleFS size of 1024KB
  ************************************************************************************************************************************/
 
 #pragma once
@@ -31,7 +33,7 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.7.0"
+#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.7.1"
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -375,6 +377,15 @@
   #include "BlockDevice.h"
   
   #include "mbed_portenta/FlashIAPLimits.h"
+  
+  #if !defined(LITTLEFS_PORTENTA_H7_SIZE_KB)
+    #define LITTLEFS_PORTENTA_H7_SIZE_KB     1024
+    #warning Force LITTLEFS_PORTENTA_H7_SIZE_KB to 1024 (KB)
+  #elif (LITTLEFS_PORTENTA_H7_SIZE_KB < 1024)
+    #undef LITTLEFS_PORTENTA_H7_SIZE_KB
+    #define LITTLEFS_PORTENTA_H7_SIZE_KB     1024
+    #warning Correct LITTLEFS_PORTENTA_H7_SIZE_KB to 1024 (KB)
+  #endif
 
   #if !defined(FORCE_REFORMAT)
     #define FORCE_REFORMAT            false
@@ -630,12 +641,24 @@ class MultiResetDetector_Generic
       // Get limits of the the internal flash of the microcontroller
       _flashIAPLimits = getFlashIAPLimits();
       
+      if (_flashIAPLimits.available_size < LITTLEFS_PORTENTA_H7_SIZE_KB * 1024)
+      {
+    #if (MRD_GENERIC_DEBUG)  
+        Serial.print("Too small Max LittleFS size (KB) = "); Serial.println(_flashIAPLimits.available_size / 1024.0);
+    #endif    
+        return;
+      }
+           
+      uint32_t deltaSize = _flashIAPLimits.available_size - LITTLEFS_PORTENTA_H7_SIZE_KB * 1024;
+  
       Serial.print("Flash Size: (KB) = "); Serial.println(_flashIAPLimits.flash_size / 1024.0);
-      Serial.print("FlashIAP Start Address: = 0x"); Serial.println(_flashIAPLimits.start_address, HEX);
-      Serial.print("LittleFS size (KB) = "); Serial.println(_flashIAPLimits.available_size / 1024.0);
+      Serial.print("FlashIAP Start Address: 0x"); Serial.println(_flashIAPLimits.start_address, HEX);
+      Serial.print("New FlashIAP Start Address: 0x"); Serial.println(_flashIAPLimits.start_address + deltaSize, HEX);
+      Serial.print("Max FlashIAP Size (KB): "); Serial.println(_flashIAPLimits.available_size / 1024.0);
+      Serial.print("Current FlashIAP Size(KB): "); Serial.println(LITTLEFS_PORTENTA_H7_SIZE_KB);
+     
+      blockDevicePtr = new FlashIAPBlockDevice(_flashIAPLimits.start_address + deltaSize, LITTLEFS_PORTENTA_H7_SIZE_KB * 1024);
             
-      blockDevicePtr = new FlashIAPBlockDevice(_flashIAPLimits.start_address, _flashIAPLimits.available_size);
-      
       if (!blockDevicePtr)
       {
   #if (MRD_GENERIC_DEBUG)       

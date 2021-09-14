@@ -594,7 +594,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ada
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -616,7 +616,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -633,7 +633,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -650,7 +650,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -667,7 +667,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -684,7 +684,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -708,7 +708,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Tee
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -726,7 +726,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -741,7 +741,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -756,7 +756,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -771,7 +771,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -786,7 +786,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -808,7 +808,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***SAM
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xffff0000
 lowerBytes = 0x0, upperBytes = 0x0
@@ -823,7 +823,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -836,7 +836,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -849,7 +849,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -862,7 +862,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -875,7 +875,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -895,7 +895,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ard
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xffffffff
 lowerBytes = 0xffff, upperBytes = 0x0
@@ -911,7 +911,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -924,7 +924,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -937,7 +937,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -950,7 +950,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -963,7 +963,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -983,7 +983,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **STM3
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1001,7 +1001,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1016,7 +1016,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1031,7 +1031,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1046,7 +1046,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1061,7 +1061,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1083,7 +1083,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **RASP
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 
 Loading MRD file failed
@@ -1107,7 +1107,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -1124,7 +1124,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -1141,7 +1141,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -1158,7 +1158,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -1175,7 +1175,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -1199,7 +1199,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **Nano
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1224,7 +1224,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1243,7 +1243,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1262,7 +1262,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1281,7 +1281,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1300,7 +1300,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1326,7 +1326,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1351,7 +1351,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1370,7 +1370,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1389,7 +1389,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1408,7 +1408,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1427,7 +1427,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1453,7 +1453,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1483,7 +1483,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1502,7 +1502,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1526,7 +1526,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1545,7 +1545,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1564,7 +1564,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1592,11 +1592,13 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 Flash Size: (KB) = 2048.00
-FlashIAP Start Address: = 0x8080000
-LittleFS size (KB) = 1536.00
+FlashIAP Start Address: 0x8080000
+New FlashIAP Start Address: 0x8100000
+Max FlashIAP Size (KB): 1536.00
+Current FlashIAP Size(KB): 1024
 LittleFS Mount OK
 Loading DRD file failed
 multiResetDetectorFlag = 0xd0d04321
@@ -1610,17 +1612,27 @@ ClearFlag write = 0xffff0000
 No multiResetDetected, number of times = 0
 LittleFS Flag read = 0xffff0000
 Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffe0001
+Saving DRD file OK
+SetFlag write = 0xfffe0001
+No Multi Reset Detected
+Stop multiResetDetecting
+Saving to DRD file : 0xfffe0001
+Saving DRD file OK
+LittleFS Flag read = 0xfffe0001
+ClearFlag write = 0xfffe0001
 ```
 
 #### 10.2 Reset Detected => Reporting 1
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 Flash Size: (KB) = 2048.00
-FlashIAP Start Address: = 0x8080000
-LittleFS size (KB) = 1536.00
+FlashIAP Start Address: 0x8080000
+New FlashIAP Start Address: 0x8100000
+Max FlashIAP Size (KB): 1536.00
+Current FlashIAP Size(KB): 1024
 LittleFS Mount OK
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -1631,19 +1643,19 @@ Saving MULTIRESETDETECTOR_FLAG to DRD file : 0xfffd0002
 Saving DRD file OK
 SetFlag write = 0xfffd0002
 No Multi Reset Detected
-Stop multiResetDetecting
-Saving to DRD file : 0xfffe0001
 ```
 
 #### 10.3 Reset Detected => Reporting 2
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 Flash Size: (KB) = 2048.00
-FlashIAP Start Address: = 0x8080000
-LittleFS size (KB) = 1536.00
+FlashIAP Start Address: 0x8080000
+New FlashIAP Start Address: 0x8100000
+Max FlashIAP Size (KB): 1536.00
+Current FlashIAP Size(KB): 1024
 LittleFS Mount OK
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -1660,11 +1672,13 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 Flash Size: (KB) = 2048.00
-FlashIAP Start Address: = 0x8080000
-LittleFS size (KB) = 1536.00
+FlashIAP Start Address: 0x8080000
+New FlashIAP Start Address: 0x8100000
+Max FlashIAP Size (KB): 1536.00
+Current FlashIAP Size(KB): 1024
 LittleFS Mount OK
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -1681,11 +1695,13 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 Flash Size: (KB) = 2048.00
-FlashIAP Start Address: = 0x8080000
-LittleFS size (KB) = 1536.00
+FlashIAP Start Address: 0x8080000
+New FlashIAP Start Address: 0x8100000
+Max FlashIAP Size (KB): 1536.00
+Current FlashIAP Size(KB): 1024
 LittleFS Mount OK
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -1702,11 +1718,13 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.0
+MultiResetDetector_Generic v1.7.1
 -----------------------------------
 Flash Size: (KB) = 2048.00
-FlashIAP Start Address: = 0x8080000
-LittleFS size (KB) = 1536.00
+FlashIAP Start Address: 0x8080000
+New FlashIAP Start Address: 0x8100000
+Max FlashIAP Size (KB): 1536.00
+Current FlashIAP Size(KB): 1024
 LittleFS Mount OK
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -1714,9 +1732,6 @@ lowerBytes = 0x5, upperBytes = 0x5
 multiResetDetected, number of times = 5
 Saving to DRD file : 0xfffe0001
 Saving DRD file OK
-LittleFS Flag read = 0xfffe0001
-ClearFlag write = 0xfffe0001
-Multi Reset Detected
 ```
 
 ---
@@ -1801,6 +1816,7 @@ Submit issues to: [MultiResetDetector_Generic issues](https://github.com/khoih-p
 15. Add support to Realtek **RTL8720DN, RTL8722DM, RTL8722CSM, etc.**, using [**Arduino AmebaD core**](https://github.com/ambiot/ambd_arduino)
 16. Add support to **MBED nRF52840-based boards such as Nano_33_BLE, Nano_33_BLE_Sense**, etc. using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed)
 17. Add support to **Portenta_H7** using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed) and LittleFS.
+18. Reduce **Portenta_H7** `LittleFS` size to 1024KB
 
 ---
 ---

@@ -13,7 +13,8 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  Version: 1.7.0
+  
+  Version: 1.7.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -25,6 +26,7 @@
   1.5.0   K Hoang      07/08/2021 Add support to RTL8720DN, etc. using AmebaD core
   1.6.0   K Hoang      29/08/2021 Add support to MBED Nano_33_BLE, Nano_33_BLE_Sense, etc. using LittleFS
   1.7.0   K Hoang      10/09/2021 Add support to MBED Portenta_H7 using LittleFS
+  1.7.1   K Hoang      13/09/2021 Select fix LittleFS size of 1024KB
 *****************************************************************************************************************************/
 
 #pragma once
