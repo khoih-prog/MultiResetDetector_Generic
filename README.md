@@ -15,6 +15,7 @@
 * [Why do we need this MultiResetDetector_Generic library](#why-do-we-need-this-multiresetdetector_generic-library)
   * [Features](#features)
   * [Currently supported Boards](#currently-supported-boards)
+* [Changelog](changelog.md) 
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
   * [Use Arduino Library Manager](#use-arduino-library-manager)
