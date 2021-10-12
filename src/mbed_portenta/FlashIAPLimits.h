@@ -14,7 +14,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
   
-  Version: 1.7.2
+  Version: 1.7.3
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -28,6 +28,7 @@
   1.7.0   K Hoang      10/09/2021 Add support to MBED Portenta_H7 using LittleFS
   1.7.1   K Hoang      13/09/2021 Select fix LittleFS size of 1024KB
   1.7.2   K Hoang      14/09/2021 Back to using auto LittleFS to fix bug
+  1.7.3   K Hoang      10/10/2021 Update `platform.ini` and `library.json`
 *****************************************************************************************************************************/
 
 #pragma once
