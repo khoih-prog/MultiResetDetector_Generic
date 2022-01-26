@@ -37,7 +37,7 @@
 #define MultiResetDetector_Generic_H
 
 #ifndef MULTIRESETDETECTOR_GENERIC_VERSION
-  #define MULTIRESETDETECTOR_GENERIC_VERSION            "DoubleResetDetector_Generic v1.8.0"
+  #define MULTIRESETDETECTOR_GENERIC_VERSION            "MultiResetDetector_Generic v1.8.0"
 
   #define MULTIRESETDETECTOR_GENERIC_VERSION_MAJOR      1
   #define MULTIRESETDETECTOR_GENERIC_VERSION_MINOR      8
