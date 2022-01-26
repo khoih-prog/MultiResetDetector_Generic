@@ -122,7 +122,7 @@
 
 ### Important Notes for Portenta_H7
 
-The LittleFS of the new **Portenta_H7** board currently tested OK with only **maximum 8 files**. The files, from 9 and up, somehow strangely can't be written and / or read. This is possibly a bug in the [`ArduinoCore-mbed mbed_portenta core`](https://github.com/arduino/ArduinoCore-mbed). The same behaviour is observed from core v2.0.0 up to v2.5.2.
+The LittleFS of the new **Portenta_H7** board currently tested OK with only **maximum 8 files**. The files, from 9 and up, somehow strangely can't be written and / or read. This is possibly a bug in the [`ArduinoCore-mbed mbed_portenta core`](https://github.com/arduino/ArduinoCore-mbed). The same behaviour is observed from core v2.0.0 up to v2.6.1.
 
 If LittleFS size is reduced to 1024KB, test is OK with only **maximum 4 files**.
 
@@ -152,15 +152,17 @@ Currently, [`DoubleResetDetector`](https://github.com/datacute/DoubleResetDetect
  
 This library can be used to detect a multi reset within a predetermined time to force the program to enter a special operation such as Config Portal, Clear Default Data, etc., using :
 
-1. EEPROM for AVR, Teensy, STM32F/L/H/G/WB/MP1 boards.
-2. [`FlashStorage_SAMD library v1.0.0`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, **NANO_33_IOT**, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.)
-3. [`DueFlashStorage library`](https://github.com/sebnil/DueFlashStorage) for SAM DUE
-4. [`Adafruit's LittleFS/InternalFS`](www.adafruit.com) for nRF52
-5. LittleFS for RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [Earle Philhower's arduino-pico core](https://github.com/earlephilhower/arduino-pico)
-6. LittleFS for RP2040-based boards, such as **Nano RP2040 Connect, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [**Arduino mbed OS for RP2040/Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
-7. [`FlashStorage_RTL8720 library`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc.
-8. LittleFS for MBED nRF52840-based boards, such as **Nano_33_BLE, Nano_33_BLE_Sense** using [**Arduino mbed OS for Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
-9. LittleFS for Portenta_H7 boards, using [**Arduino mbed_portenta core for Portenta boards**](https://github.com/arduino/ArduinoCore-mbed).
+ 1. EEPROM for AVR, Teensy boards.
+ 2. [`FlashStorage_SAMD library`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, **NANO_33_IOT**, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.)
+ 3. [`FlashStorage_STM32F1 library`](https://github.com/khoih-prog/FlashStorage_STM32F1) for STM32F1 and STM32F3 boards
+ 4. [`FlashStorage_STM32 library`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards
+ 5. [`DueFlashStorage library`](https://github.com/sebnil/DueFlashStorage) for SAM DUE
+ 6. [`Adafruit's LittleFS/InternalFS`](www.adafruit.com) for nRF52
+ 7. LittleFS for RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [Earle Philhower's arduino-pico core](https://github.com/earlephilhower/arduino-pico)
+ 8. LittleFS for RP2040-based boards, such as **Nano RP2040 Connect, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040** using [**Arduino mbed OS for RP2040/Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
+ 9. [`FlashStorage_RTL8720 library`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc.
+10. LittleFS for MBED nRF52840-based boards, such as **Nano_33_BLE, Nano_33_BLE_Sense** using [**Arduino mbed OS for Nano boards**](https://github.com/arduino/ArduinoCore-mbed).
+11. LittleFS for Portenta_H7 boards, using [**Arduino mbed_portenta core for Portenta boards**](https://github.com/arduino/ArduinoCore-mbed).
 
 ---
 
@@ -218,25 +220,25 @@ This [**MultiResetDetector_Generic** library](https://github.com/khoih-prog/Mult
 
 ## Prerequisites
 
- 1. [`Arduino IDE 1.8.16+` for Arduino](https://www.arduino.cc/en/Main/Software)
- 2. [`Arduino Core for STM32 v2.1.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
- 3. [`Teensy core 1.55+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
+ 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
+ 2. [`Arduino Core for STM32 v2.2.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest)
+ 3. [`Teensy core 1.56+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0, LC) boards
  4. [`Arduino SAM DUE core 1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards
- 5. [`Arduino SAMD core 1.8.11+`](https://www.arduino.cc/en/Guide/ArduinoM0) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
- 6. [`Adafruit SAMD core 1.7.5+`](https://www.adafruit.com/) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
- 7. [`Seeeduino SAMD core 1.8.1+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
- 8. [`Adafruit nRF52 v1.1.0+`](https://www.adafruit.com) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
- 9. [`Earle Philhower's arduino-pico core v1.9.5+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
-10. [`Arduino mbed_rp2040 core 2.5.2+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-11. [`Arduino mbed_nano core 2.5.2+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) MBED nRF52840-based boards such as **Nano_33_BLE, Nano_33_BLE_Sense**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-12. [`ArduinoCore-mbed mbed_portenta core 2.5.2+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino **Portenta_H7**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-13. [`Arduino AmebaD core 3.0.10+`](https://github.com/ambiot/ambd_arduino) for Realtek RTL8720DN, RTL8722DM and RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/ambiot/ambd_arduino.svg)](https://github.com/ambiot/ambd_arduino/releases/latest)
+ 5. [`Arduino SAMD core 1.8.12+`](https://www.arduino.cc/en/Guide/ArduinoM0) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
+ 6. [`Adafruit SAMD core 1.7.7+`](https://www.adafruit.com/) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
+ 7. [`Seeeduino SAMD core 1.8.2+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
+ 8. [`Adafruit nRF52 v1.3.0+`](https://www.adafruit.com) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
+ 9. [`Earle Philhower's arduino-pico core v1.9.14+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+10. [`Arduino mbed_rp2040 core 2.6.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) RP2040-based boards, such as **Arduino Nano RP2040 Connect, RASPBERRY_PI_PICO, etc.**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+11. [`Arduino mbed_nano core 2.6.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) MBED nRF52840-based boards such as **Nano_33_BLE, Nano_33_BLE_Sense**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+12. [`ArduinoCore-mbed mbed_portenta core 2.6.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino **Portenta_H7**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+13. [`Arduino AmebaD core 3.1.1+`](https://github.com/ambiot/ambd_arduino) for Realtek RTL8720DN, RTL8722DM and RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/ambiot/ambd_arduino.svg)](https://github.com/ambiot/ambd_arduino/releases/latest)
 
-14. [`FlashStorage_SAMD library v1.2.1+`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, NANO_33_IOT, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.). [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_SAMD.svg)](https://github.com/khoih-prog/FlashStorage_SAMD/releases/latest)
-15. [`FlashStorage_STM32F1 library v1.0.1+`](https://github.com/khoih-prog/FlashStorage_STM32F1) for STM32F1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32F1.svg?)](https://www.ardu-badge.com/FlashStorage_STM32F1)
-16. [`FlashStorage_STM32 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32)
+14. [`FlashStorage_SAMD library v1.3.2+`](https://github.com/khoih-prog/FlashStorage_SAMD) for SAMD21 and SAMD51 boards (ZERO, MKR, NANO_33_IOT, M0, M0 Pro, AdaFruit Itsy-Bitsy M4, etc.). [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_SAMD.svg)](https://github.com/khoih-prog/FlashStorage_SAMD/releases/latest)
+15. [`FlashStorage_STM32F1 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_STM32F1) for STM32F1/F3 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32F1.svg?)](https://www.ardu-badge.com/FlashStorage_STM32F1)
+16. [`FlashStorage_STM32 library v1.2.0+`](https://github.com/khoih-prog/FlashStorage_STM32) for STM32F/L/H/G/WB/MP1 boards. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/FlashStorage_STM32.svg?)](https://www.ardu-badge.com/FlashStorage_STM32)
 17. [`DueFlashStorage library v1.0.0+`](https://github.com/sebnil/DueFlashStorage) for SAM DUE. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DueFlashStorage.svg?)](https://www.ardu-badge.com/DueFlashStorage)
-18. [`FlashStorage_RTL8720 library v1.0.0+`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_RTL8720.svg)](https://github.com/khoih-prog/FlashStorage_RTL8720/releases/latest)
+18. [`FlashStorage_RTL8720 library v1.1.0+`](https://github.com/khoih-prog/FlashStorage_RTL8720) for Realtek RTL8720DN, RTL8722DM, RTL8722CSM, etc. boards. [![GitHub release](https://img.shields.io/github/release/khoih-prog/FlashStorage_RTL8720.svg)](https://github.com/khoih-prog/FlashStorage_RTL8720/releases/latest)
 
 
 ---
@@ -272,19 +274,19 @@ Another way to install is to:
 
 #### 1. For Adafruit nRF52840 and nRF52832 boards
 
-**To be able to compile, run and automatically detect and display BOARD_NAME on nRF52840/nRF52832 boards**, you have to copy the whole [nRF52 Packages_Patches](Packages_Patches/adafruit/hardware/nrf52/1.1.0) directory into Adafruit nRF52 directory (~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0). 
+**To be able to compile, run and automatically detect and display BOARD_NAME on nRF52840/nRF52832 boards**, you have to copy the whole [nRF52 Packages_Patches](Packages_Patches/adafruit/hardware/nrf52/1.3.0) directory into Adafruit nRF52 directory (~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0). 
 
-Supposing the Adafruit nRF52 version is 1.1.0. These files must be copied into the directory:
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/platform.txt`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/boards.txt`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/cores/nRF5/Udp.h`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/cores/nRF5/Print.h`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/cores/nRF5/Print.cpp`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/variants/NINA_B302_ublox/variant.h`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/variants/NINA_B302_ublox/variant.cpp`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/variants/NINA_B112_ublox/variant.h`
-- `~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/variants/NINA_B112_ublox/variant.cpp`
-- **`~/.arduino15/packages/adafruit/hardware/nrf52/1.1.0/cores/nRF5/Udp.h`**
+Supposing the Adafruit nRF52 version is 1.3.0. These files must be copied into the directory:
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/platform.txt`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/boards.txt`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/cores/nRF5/Udp.h`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/cores/nRF5/Print.h`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/cores/nRF5/Print.cpp`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/variants/NINA_B302_ublox/variant.h`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/variants/NINA_B302_ublox/variant.cpp`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/variants/NINA_B112_ublox/variant.h`
+- `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/variants/NINA_B112_ublox/variant.cpp`
+- **`~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/cores/nRF5/Udp.h`**
 
 Whenever a new version is installed, remember to copy these files into the new version directory. For example, new version is x.yy.z
 These files must be copied into the directory:
@@ -302,14 +304,14 @@ These files must be copied into the directory:
 
 #### 2. For Teensy boards
  
- **To be able to compile and run on Teensy boards**, you have to copy the files in [**Packages_Patches for Teensy directory**](Packages_Patches/hardware/teensy/avr) into Teensy hardware directory (./arduino-1.8.15/hardware/teensy/avr/boards.txt). 
+ **To be able to compile and run on Teensy boards**, you have to copy the files in [**Packages_Patches for Teensy directory**](Packages_Patches/hardware/teensy/avr) into Teensy hardware directory (./arduino-1.8.19/hardware/teensy/avr/boards.txt). 
 
-Supposing the Arduino version is 1.8.15. These files must be copied into the directory:
+Supposing the Arduino version is 1.8.19. These files must be copied into the directory:
 
-- `./arduino-1.8.15/hardware/teensy/avr/boards.txt`
-- `./arduino-1.8.15/hardware/teensy/avr/cores/teensy/Stream.h`
-- `./arduino-1.8.15/hardware/teensy/avr/cores/teensy3/Stream.h`
-- `./arduino-1.8.15/hardware/teensy/avr/cores/teensy4/Stream.h`
+- `./arduino-1.8.19/hardware/teensy/avr/boards.txt`
+- `./arduino-1.8.19/hardware/teensy/avr/cores/teensy/Stream.h`
+- `./arduino-1.8.19/hardware/teensy/avr/cores/teensy3/Stream.h`
+- `./arduino-1.8.19/hardware/teensy/avr/cores/teensy4/Stream.h`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 These files must be copied into the directory:
@@ -334,13 +336,13 @@ This file must be copied into the directory:
 
 #### 4. For Arduino SAMD boards
  
- ***To be able to compile, run and automatically detect and display BOARD_NAME on Arduino SAMD (Nano-33-IoT, etc) boards***, you have to copy the whole [Arduino SAMD Packages_Patches](Packages_Patches/arduino/hardware/samd/1.8.11) directory into Arduino SAMD directory (~/.arduino15/packages/arduino/hardware/samd/1.8.11).
+ ***To be able to compile, run and automatically detect and display BOARD_NAME on Arduino SAMD (Nano-33-IoT, etc) boards***, you have to copy the whole [Arduino SAMD Packages_Patches](Packages_Patches/arduino/hardware/samd/1.8.12) directory into Arduino SAMD directory (~/.arduino15/packages/arduino/hardware/samd/1.8.12).
  
 #### For core version v1.8.10+
 
-Supposing the Arduino SAMD version is 1.8.11. Now only one file must be copied into the directory:
+Supposing the Arduino SAMD version is 1.8.12. Now only one file must be copied into the directory:
 
-- `~/.arduino15/packages/arduino/hardware/samd/1.8.11/platform.txt`
+- `~/.arduino15/packages/arduino/hardware/samd/1.8.12/platform.txt`
 
 Whenever a new version is installed, remember to copy this files into the new version directory. For example, new version is x.yy.zz
 
@@ -373,13 +375,13 @@ Whenever the above-mentioned compiler error issue is fixed with the new Arduino 
 
 #### 5. For Adafruit SAMD boards
  
- ***To be able to compile, run and automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the whole [Adafruit SAMD Packages_Patches](Packages_Patches/adafruit/hardware/samd/1.7.5) directory into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.7.5). 
+ ***To be able to compile, run and automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the whole [Adafruit SAMD Packages_Patches](Packages_Patches/adafruit/hardware/samd/1.7.7) directory into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.7.7). 
 
-Supposing the Adafruit SAMD core version is 1.7.5. This file must be copied into the directory:
+Supposing the Adafruit SAMD core version is 1.7.7. This file must be copied into the directory:
 
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.5/platform.txt`
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.5/cores/arduino/Print.h`
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.5/cores/arduino/Print.cpp`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.7/platform.txt`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.7/cores/arduino/Print.h`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.7/cores/arduino/Print.cpp`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -417,12 +419,12 @@ To use LAN8720 on some STM32 boards
 - **Discovery (DISCO_F746NG)**
 - **STM32F4 boards (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE_Mini, DIYMORE_F407VGT, FK407M1)**
 
-you have to copy the files [stm32f4xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.1.0/system/STM32F4xx) and [stm32f7xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.1.0/system/STM32F7xx) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.1.0/system) to overwrite the old files.
+you have to copy the files [stm32f4xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.2.0/system/STM32F4xx) and [stm32f7xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.2.0/system/STM32F7xx) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system) to overwrite the old files.
 
-Supposing the STM32 stm32 core version is 2.1.0. These files must be copied into the directory:
+Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into the directory:
 
-- `~/.arduino15/packages/STM32/hardware/stm32/2.1.0/system/STM32F4xx/stm32f4xx_hal_conf_default.h` for STM32F4.
-- `~/.arduino15/packages/STM32/hardware/stm32/2.1.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system/STM32F4xx/stm32f4xx_hal_conf_default.h` for STM32F4.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
 theses files must be copied into the corresponding directory:
@@ -433,12 +435,12 @@ theses files must be copied into the corresponding directory:
 
 #### 7.2 For STM32 boards to use Serial1
 
-**To use Serial1 on some STM32 boards without Serial1 definition (Nucleo-144 NUCLEO_F767ZI, Nucleo-64 NUCLEO_L053R8, etc.) boards**, you have to copy the files [STM32 variant.h](Packages_Patches/STM32/hardware/stm32/2.1.0) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.1.0). You have to modify the files corresponding to your boards, this is just an illustration how to do.
+**To use Serial1 on some STM32 boards without Serial1 definition (Nucleo-144 NUCLEO_F767ZI, Nucleo-64 NUCLEO_L053R8, etc.) boards**, you have to copy the files [STM32 variant.h](Packages_Patches/STM32/hardware/stm32/2.2.0) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.2.0). You have to modify the files corresponding to your boards, this is just an illustration how to do.
 
-Supposing the STM32 stm32 core version is 2.1.0. These files must be copied into the directory:
+Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into the directory:
 
-- `~/.arduino15/packages/STM32/hardware/stm32/2.1.0/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h` for Nucleo-144 NUCLEO_F767ZI.
-- `~/.arduino15/packages/STM32/hardware/stm32/2.1.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h` for Nucleo-144 NUCLEO_F767ZI.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
 theses files must be copied into the corresponding directory:
@@ -481,12 +483,12 @@ With core after v1.5.0, this step is not necessary anymore thanks to the PR [Add
 
 #### 9. For Portenta_H7 boards using Arduino IDE in Linux
 
-  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/2.5.2/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/2.5.2/portenta_post_install.sh). 
+  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/2.6.1/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/2.6.1/portenta_post_install.sh). 
   
   Then run the following command using `sudo`
   
 ```
-$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/2.5.2
+$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/2.6.1
 $ chmod 755 portenta_post_install.sh
 $ sudo ./portenta_post_install.sh
 ```
@@ -499,9 +501,9 @@ This will create the file `/etc/udev/rules.d/49-portenta_h7.rules` as follows:
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="035b", GROUP="plugdev", MODE="0666"
 ```
 
-Supposing the ArduinoCore-mbed core version is 2.5.2. Now only one file must be copied into the directory:
+Supposing the ArduinoCore-mbed core version is 2.6.1. Now only one file must be copied into the directory:
 
-- `~/.arduino15/packages/arduino/hardware/mbed_portenta/2.5.2/portenta_post_install.sh`
+- `~/.arduino15/packages/arduino/hardware/mbed_portenta/2.6.1/portenta_post_install.sh`
 
 Whenever a new version is installed, remember to copy this files into the new version directory. For example, new version is x.yy.zz
 
@@ -625,7 +627,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ada
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -647,7 +649,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -664,7 +666,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -681,7 +683,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -698,7 +700,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -715,7 +717,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -739,7 +741,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Tee
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -757,7 +759,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -772,7 +774,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -787,7 +789,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -802,7 +804,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -817,7 +819,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 EEPROM size = 1080, start = 0
@@ -839,7 +841,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***SAM
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xffff0000
 lowerBytes = 0x0, upperBytes = 0x0
@@ -854,7 +856,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -867,7 +869,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -880,7 +882,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -893,7 +895,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -906,7 +908,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -926,7 +928,7 @@ This is terminal debug output when running [minimal](examples/minimal) on ***Ard
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xffffffff
 lowerBytes = 0xffff, upperBytes = 0x0
@@ -942,7 +944,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffe0001
 lowerBytes = 0x1, upperBytes = 0x1
@@ -955,7 +957,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffd0002
 lowerBytes = 0x2, upperBytes = 0x2
@@ -968,7 +970,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffc0003
 lowerBytes = 0x3, upperBytes = 0x3
@@ -981,7 +983,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffb0004
 lowerBytes = 0x4, upperBytes = 0x4
@@ -994,7 +996,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 multiResetDetectorFlag = 0xfffa0005
 lowerBytes = 0x5, upperBytes = 0x5
@@ -1014,7 +1016,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **STM3
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1032,7 +1034,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1047,7 +1049,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1062,7 +1064,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1077,7 +1079,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1092,7 +1094,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on NUCLEO_F767ZI
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 (Emulated-)EEPROM size = 16384, start = 0
@@ -1114,7 +1116,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **RASP
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 
 Loading MRD file failed
@@ -1138,7 +1140,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffe0001
 multiResetDetectorFlag = 0xfffe0001
@@ -1155,7 +1157,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffd0002
 multiResetDetectorFlag = 0xfffd0002
@@ -1172,7 +1174,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffc0003
 multiResetDetectorFlag = 0xfffc0003
@@ -1189,7 +1191,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffb0004
 multiResetDetectorFlag = 0xfffb0004
@@ -1206,7 +1208,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RASPBERRY_PI_PICO
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS Flag read = 0xfffa0005
 multiResetDetectorFlag = 0xfffa0005
@@ -1230,7 +1232,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **Nano
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1255,7 +1257,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1274,7 +1276,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1293,7 +1295,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1312,7 +1314,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1331,7 +1333,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano RP2040 Connect
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1357,7 +1359,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1382,7 +1384,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1401,7 +1403,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1420,7 +1422,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1439,7 +1441,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1458,7 +1460,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on RaspberryPi Pico
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1484,7 +1486,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1514,7 +1516,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1533,7 +1535,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1557,7 +1559,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1576,7 +1578,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1595,7 +1597,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on Nano 33 BLE
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 LittleFS size (KB) = 64
 LittleFS Mount OK
@@ -1623,7 +1625,7 @@ This is terminal debug output when running [minimal](examples/minimal) on **MBED
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 Flash Size: (KB) = 2048.00
 FlashIAP Start Address: = 0x8080000
@@ -1655,7 +1657,7 @@ ClearFlag write = 0xfffe0001
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 Flash Size: (KB) = 2048.00
 FlashIAP Start Address: = 0x8080000
@@ -1676,7 +1678,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 Flash Size: (KB) = 2048.00
 FlashIAP Start Address: = 0x8080000
@@ -1697,7 +1699,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 Flash Size: (KB) = 2048.00
 FlashIAP Start Address: = 0x8080000
@@ -1718,7 +1720,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 Flash Size: (KB) = 2048.00
 FlashIAP Start Address: = 0x8080000
@@ -1739,7 +1741,7 @@ No Multi Reset Detected
 
 ```
 MultiResetDetector minimal Example Program on PORTENTA_H7_M7
-MultiResetDetector_Generic v1.7.3
+MultiResetDetector_Generic v1.8.0
 -----------------------------------
 Flash Size: (KB) = 2048.00
 FlashIAP Start Address: = 0x8080000
@@ -1837,6 +1839,10 @@ Submit issues to: [MultiResetDetector_Generic issues](https://github.com/khoih-p
 16. Add support to **MBED nRF52840-based boards such as Nano_33_BLE, Nano_33_BLE_Sense**, etc. using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed)
 17. Add support to **Portenta_H7** using [**Arduino-mbed mbed_nano** core](https://github.com/arduino/ArduinoCore-mbed) and LittleFS.
 18. Reduce **Portenta_H7** `LittleFS` size to 1024KB
+19. Update to be compatible with new `FlashStorage_SAMD`, `FlashStorage_STM32` and `FlashStorage_STM32F1` libraries.
+20. Use more efficient `FlashStorage_STM32` and `FlashStorage_STM32F1` libraries for STM32
+21. Add support to more `SAMD` and `STM32` boards
+
 
 ---
 ---

@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.8.0](#releases-v180)
   * [Releases v1.7.3](#releases-v173)
   * [Releases v1.7.2](#releases-v172)
   * [Releases v1.7.1](#releases-v171)
@@ -28,6 +29,13 @@
 ---
 
 ## Changelog
+
+### Releases v1.8.0
+
+1. Update to be compatible with new `FlashStorage_SAMD`, `FlashStorage_STM32` and `FlashStorage_STM32F1` libraries.
+2. Use more efficient `FlashStorage_STM32` and `FlashStorage_STM32F1` libraries for STM32
+3. Add support to more `SAMD` and `STM32` boards
+4. Update `Packages' Patches`
 
 ### Releases v1.7.3
 

@@ -13,7 +13,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
   
-  Version: 1.7.3
+  Version: 1.8.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -28,6 +28,7 @@
   1.7.1   K Hoang      13/09/2021 Select fix LittleFS size of 1024KB
   1.7.2   K Hoang      14/09/2021 Back to using auto LittleFS to fix bug
   1.7.3   K Hoang      10/10/2021 Update `platform.ini` and `library.json`
+  1.8.0   K Hoang      26/01/2022 Update to be compatible with new FlashStorage libraries. Add support to more SAMD/STM32 boards
  ************************************************************************************************************************************/
 
 #pragma once
@@ -35,7 +36,16 @@
 #ifndef MultiResetDetector_Generic_H
 #define MultiResetDetector_Generic_H
 
-#define MULTIRESETDETECTOR_GENERIC_VERSION       "MultiResetDetector_Generic v1.7.3"
+#ifndef MULTIRESETDETECTOR_GENERIC_VERSION
+  #define MULTIRESETDETECTOR_GENERIC_VERSION            "DoubleResetDetector_Generic v1.8.0"
+
+  #define MULTIRESETDETECTOR_GENERIC_VERSION_MAJOR      1
+  #define MULTIRESETDETECTOR_GENERIC_VERSION_MINOR      8
+  #define MULTIRESETDETECTOR_GENERIC_VERSION_PATCH      0
+
+#define MULTIRESETDETECTOR_GENERIC_VERSION_INT        1008000
+
+#endif
 
 #if ( defined(ESP32) || defined(ESP8266) )
   #error Please use ESP_MultiResetDetector library (https://github.com/khoih-prog/ESP_MultiResetDetector) for ESP8266 and ESP32!
@@ -81,10 +91,13 @@
   
 /////////////////////////////  
 #elif ( defined(ARDUINO_SAMD_ZERO) || defined(ARDUINO_SAMD_MKR1000) || defined(ARDUINO_SAMD_MKRWIFI1010) \
-   || defined(ARDUINO_SAMD_NANO_33_IOT) || defined(ARDUINO_SAMD_MKRFox1200) || defined(ARDUINO_SAMD_MKRWAN1300) \
-   || defined(ARDUINO_SAMD_MKRWAN1310) || defined(ARDUINO_SAMD_MKRGSM1400) || defined(ARDUINO_SAMD_MKRNB1500) \
-   || defined(ARDUINO_SAMD_MKRVIDOR4000) || defined(__SAMD21G18A__) || defined(ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS) \
-   || defined(__SAMD51__) || defined(__SAMD51J20A__) || defined(__SAMD51J19A__) || defined(__SAMD51G19A__) )
+      || defined(ARDUINO_SAMD_NANO_33_IOT) || defined(ARDUINO_SAMD_MKRFox1200) || defined(ARDUINO_SAMD_MKRWAN1300) || defined(ARDUINO_SAMD_MKRWAN1310) \
+      || defined(ARDUINO_SAMD_MKRGSM1400) || defined(ARDUINO_SAMD_MKRNB1500) || defined(ARDUINO_SAMD_MKRVIDOR4000) \
+      || defined(ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS) || defined(__SAMD51__) || defined(__SAMD51J20A__) \
+      || defined(__SAMD51J19A__) || defined(__SAMD51G19A__) || defined(__SAMD51P19A__)  \
+      || defined(__SAMD21E15A__) || defined(__SAMD21E16A__) || defined(__SAMD21E17A__) || defined(__SAMD21E18A__) \
+      || defined(__SAMD21G15A__) || defined(__SAMD21G16A__) || defined(__SAMD21G17A__) || defined(__SAMD21G18A__) \
+      || defined(__SAMD21J15A__) || defined(__SAMD21J16A__) || defined(__SAMD21J17A__) || defined(__SAMD21J18A__) )
   #if defined(MRD_GENERIC_USE_SAMD)
     #undef MRD_GENERIC_USE_SAMD
   #endif
@@ -288,8 +301,7 @@
 /////////////////////////////
 #elif MRD_GENERIC_USE_SAMD
   // Include EEPROM-like API for FlashStorage
-  //#include <FlashAsEEPROM.h>                //https://github.com/cmaglie/FlashStorage
-  #include <FlashAsEEPROM_SAMD.h>             //https://github.com/khoih-prog/FlashStorage_SAMD
+  #include <FlashStorage_SAMD.h>             //https://github.com/khoih-prog/FlashStorage_SAMD
 
 /////////////////////////////  
 #elif MRD_GENERIC_USE_SAM_DUE
@@ -450,7 +462,7 @@
   #if defined(MRD_FILENAME)
     #undef MRD_FILENAME
   #endif
-  #define  MRD_FILENAME     "/littlefs/drd.dat"
+  #define  MRD_FILENAME     "/littlefs/mrd.dat"
   
   #warning MRD_NANO33BLE_LITTLEFS INITIALIZED locally in MultiResetDetector_Generic
   
@@ -464,7 +476,7 @@
       // For STM32 devices having integrated EEPROM.
       #include <EEPROM.h>
       #warning STM32 devices have integrated EEPROM. Not using buffered API.   
-  #else  
+  #else
       /**
        Most STM32 devices don't have an integrated EEPROM. To emulate a EEPROM, the STM32 Arduino core emulated
        the operation of an EEPROM with the help of the embedded flash.
@@ -473,8 +485,13 @@
        The STM32 Arduino core provides a buffered access API to the emulated EEPROM. The library has allocated the
        buffer even if you don't use the buffered API, so it's strongly suggested to use the buffered API anyhow.
        */
-      #include <FlashStorage_STM32.h>       // https://github.com/khoih-prog/FlashStorage_STM32
-      #warning STM32 devices have no integrated EEPROM. Using buffered API with FlashStorage_STM32 library
+      #if ( defined(STM32F1xx) || defined(STM32F3xx) )
+        #include <FlashStorage_STM32F1.h>       // https://github.com/khoih-prog/FlashStorage_STM32
+        #warning STM32F1/F3 devices have no integrated EEPROM. Using buffered API with FlashStorage_STM32F1 library
+      #else
+        #include <FlashStorage_STM32.h>       // https://github.com/khoih-prog/FlashStorage_STM32
+        #warning STM32 devices have no integrated EEPROM. Using buffered API with FlashStorage_STM32 library
+      #endif
   #endif    // #if defined(DATA_EEPROM_BASE)
 
   //////////////////////////////////////////////
@@ -947,7 +964,7 @@ class MultiResetDetector_Generic
       else
       {
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Loading DRD file failed");
+        Serial.println("Loading MRD file failed");
   #endif
       }
            
@@ -979,7 +996,7 @@ class MultiResetDetector_Generic
       else
       {
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Loading DRD file failed");
+        Serial.println("Loading MRD file failed");
   #endif
       }
            
@@ -1274,7 +1291,7 @@ class MultiResetDetector_Generic
       FILE *file = fopen(MRD_FILENAME, "w");
       
   #if (MRD_GENERIC_DEBUG)
-      Serial.print("Saving MULTIRESETDETECTOR_FLAG to DRD file : 0x");
+      Serial.print("Saving MULTIRESETDETECTOR_FLAG to MRD file : 0x");
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
   #endif
 
@@ -1285,13 +1302,13 @@ class MultiResetDetector_Generic
         
         fclose(file);
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file OK");
+        Serial.println("Saving MRD file OK");
   #endif
       }
       else
       {
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file failed");
+        Serial.println("Saving MRD file failed");
   #endif
       }
       
@@ -1303,7 +1320,7 @@ class MultiResetDetector_Generic
       FILE *file = fopen(MRD_FILENAME, "w");
       
   #if (MRD_GENERIC_DEBUG)
-      Serial.print("Saving MULTIRESETDETECTOR_FLAG to DRD file : 0x");
+      Serial.print("Saving MULTIRESETDETECTOR_FLAG to MRD file : 0x");
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
   #endif
 
@@ -1314,13 +1331,13 @@ class MultiResetDetector_Generic
         
         fclose(file);
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file OK");
+        Serial.println("Saving MRD file OK");
   #endif
       }
       else
       {
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file failed");
+        Serial.println("Saving MRD file failed");
   #endif
       }
             
@@ -1489,7 +1506,7 @@ class MultiResetDetector_Generic
       FILE *file = fopen(MRD_FILENAME, "w");
       
   #if (MRD_GENERIC_DEBUG)
-      Serial.print("Saving to DRD file : 0x");
+      Serial.print("Saving to MRD file : 0x");
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
   #endif
 
@@ -1501,13 +1518,13 @@ class MultiResetDetector_Generic
         fclose(file);
         
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file OK");
+        Serial.println("Saving MRD file OK");
   #endif
       }
       else
       {
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file failed");
+        Serial.println("Saving MRD file failed");
   #endif
       }   
       
@@ -1522,7 +1539,7 @@ class MultiResetDetector_Generic
       FILE *file = fopen(MRD_FILENAME, "w");
       
   #if (MRD_GENERIC_DEBUG)
-      Serial.print("Saving to DRD file : 0x");
+      Serial.print("Saving to MRD file : 0x");
       Serial.println(String(MULTIRESETDETECTOR_FLAG, HEX));
   #endif
 
@@ -1534,13 +1551,13 @@ class MultiResetDetector_Generic
         fclose(file);
         
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file OK");
+        Serial.println("Saving MRD file OK");
   #endif
       }
       else
       {
   #if (MRD_GENERIC_DEBUG)
-        Serial.println("Saving DRD file failed");
+        Serial.println("Saving MRD file failed");
   #endif
       }   
       

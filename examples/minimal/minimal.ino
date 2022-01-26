@@ -18,7 +18,7 @@
    This method works well on Wemos boards which have a single reset button on board. It avoids using a pin for launching the configuration portal.
 
    How It Works
-   1) AVR Mega, Teensy, STM32
+   1) AVR Mega, Teensy
    Save data in EPPROM from address 1020, size 1024 bytes (both configurable)
    Note: Teensy 4.0 has only 1080 bytes of EEPROM-simulated Flash
    2) SAMD
@@ -29,6 +29,8 @@
    Save data in InternalFS, fle "/drd.dat" location 0
    5) RTL8720
    Save data in FlashStorage from address 0 (configurable to avoid conflict)
+   6) STM32
+   Save data in EEPROM-simulated FlashStorage from address 0 (configurable to avoid conflict)
 
    So when the device starts up it checks the InternalFS file "/mrd.dat", EEPROM or (Due)FlashStorage for a flag to see if it has been
    recently reset within the configurable timeout seconds
