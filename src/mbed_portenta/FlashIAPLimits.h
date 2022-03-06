@@ -14,7 +14,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
   
-  Version: 1.8.0
+  Version: 1.8.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -30,7 +30,8 @@
   1.7.2   K Hoang      14/09/2021 Back to using auto LittleFS to fix bug
   1.7.3   K Hoang      10/10/2021 Update `platform.ini` and `library.json`
   1.8.0   K Hoang      26/01/2022 Update to be compatible with new FlashStorage libraries. Add support to more SAMD/STM32 boards
-*****************************************************************************************************************************/
+  1.8.1   K Hoang      05/03/2022 Add waitingForMRD() function to signal in MRD wating period
+ ************************************************************************************************************************************/
 
 #pragma once
 

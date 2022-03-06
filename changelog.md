@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.8.1](#releases-v181)
   * [Releases v1.8.0](#releases-v180)
   * [Releases v1.7.3](#releases-v173)
   * [Releases v1.7.2](#releases-v172)
@@ -29,6 +30,13 @@
 ---
 
 ## Changelog
+
+### Releases v1.8.1
+
+1. Add waitingForMRD() function to signal in MRD wating period. Check [DRD is waiting for a double reset? #14](https://github.com/khoih-prog/ESP_DoubleResetDetector/discussions/14)
+2. Add example [checkWaitingMRD](https://github.com/khoih-prog/MultiResetDetector_Generic/tree/main/examples/checkWaitingMRD) to demo how to use the new feature.
+3. Add support to `Sparkfun Pro nRF52840 Mini`
+4. Update `Packages' Patches`
 
 ### Releases v1.8.0
 
