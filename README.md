@@ -130,7 +130,7 @@ The LittleFS of the new **Portenta_H7** board currently tested OK with only **ma
 
 If LittleFS size is reduced to 1024KB, test is OK with only **maximum 4 files**.
 
-Beware and keep cheking for updates.
+Beware and keep checking for updates.
 
 ---
 ---
@@ -433,7 +433,7 @@ Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into
 - `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
-theses files must be copied into the corresponding directory:
+these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F4xx/stm32f4xx_hal_conf_default.h`
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F7xx/stm32f7xx_hal_conf_default.h
@@ -449,7 +449,7 @@ Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into
 - `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
-theses files must be copied into the corresponding directory:
+these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h`
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h`
@@ -1788,7 +1788,7 @@ Submit issues to: [MultiResetDetector_Generic issues](https://github.com/khoih-p
 20. Use more efficient `FlashStorage_STM32` and `FlashStorage_STM32F1` libraries for STM32
 21. Add support to more `SAMD` and `STM32` boards
 22. Add support to `Sparkfun Pro nRF52840 Mini`
-23. Add waitingForMRD() function to signal in MRD wating period
+23. Add waitingForMRD() function to signal in MRD waiting period
 
 ---
 ---

@@ -33,7 +33,7 @@
 
 ### Releases v1.8.1
 
-1. Add waitingForMRD() function to signal in MRD wating period. Check [DRD is waiting for a double reset? #14](https://github.com/khoih-prog/ESP_DoubleResetDetector/discussions/14)
+1. Add waitingForMRD() function to signal in MRD waiting period. Check [DRD is waiting for a double reset? #14](https://github.com/khoih-prog/ESP_DoubleResetDetector/discussions/14)
 2. Add example [checkWaitingMRD](https://github.com/khoih-prog/MultiResetDetector_Generic/tree/main/examples/checkWaitingMRD) to demo how to use the new feature.
 3. Add support to `Sparkfun Pro nRF52840 Mini`
 4. Update `Packages' Patches`
