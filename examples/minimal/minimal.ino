@@ -55,7 +55,7 @@
 // Number of subsequent resets during MRD_TIMEOUT to activate
 #define MRD_TIMES               5
 
-// Number of seconds after reset during which a 
+// Number of seconds after reset during which a
 // subsequent reset will be considered a multi reset.
 #define MRD_TIMEOUT             10
 
@@ -75,12 +75,14 @@ void setup()
   pinMode(LED_BUILTIN, OUTPUT);
 
   Serial.begin(115200);
+
   while (!Serial);
 
   Serial.println();
 
 #if defined(BOARD_NAME)
-  Serial.print(F("MultiResetDetector minimal Example Program on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("MultiResetDetector minimal Example Program on "));
+  Serial.println(BOARD_NAME);
 #else
   Serial.println(F("MultiResetDetector minimal Example Program"));
 #endif
@@ -90,12 +92,12 @@ void setup()
 
   mrd = new MultiResetDetector_Generic(MRD_TIMEOUT, MRD_ADDRESS);
 
-  if (mrd->detectMultiReset()) 
+  if (mrd->detectMultiReset())
   {
     Serial.println(F("Multi Reset Detected"));
     digitalWrite(LED_BUILTIN, LOW);
-  } 
-  else 
+  }
+  else
   {
     Serial.println(F("No Multi Reset Detected"));
     digitalWrite(LED_BUILTIN, HIGH);

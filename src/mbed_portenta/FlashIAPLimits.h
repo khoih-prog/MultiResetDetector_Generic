@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   FlashIAPLimits.h - Filesystem wrapper for LittleFS on the Mbed Portenta_H7
-  
+
   Arduino AVR, Teensy, SAM-DUE, SAMD21/SAMD51, STM32F/L/H/G/WB/MP1, nRF52, RASPBERRY_PI_PICO, etc. boards
 
   MultiResetDetector_Generic is a library for the Arduino AVR, Teensy, SAM-DUE, SAMD, STM32, nRF52, RASPBERRY_PI_PICO, etc. boards
@@ -13,7 +13,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/MultiResetDetector_Generic
   Licensed under MIT license
-  
+
   Version: 1.8.1
 
   Version Modified By   Date      Comments
@@ -45,7 +45,7 @@
 using namespace mbed;
 
 // A helper struct for FlashIAP limits
-struct FlashIAPLimits 
+struct FlashIAPLimits
 {
   size_t flash_size;
   uint32_t start_address;
@@ -57,24 +57,24 @@ struct FlashIAPLimits
 static FlashIAPLimits getFlashIAPLimits()
 {
   // Alignment lambdas
-  auto align_down = [](uint64_t val, uint64_t size) 
+  auto align_down = [](uint64_t val, uint64_t size)
   {
     return (((val) / size)) * size;
   };
-  
-  auto align_up = [](uint32_t val, uint32_t size) 
+
+  auto align_up = [](uint32_t val, uint32_t size)
   {
     return (((val - 1) / size) + 1) * size;
   };
 
   FlashIAPLimits flashIAPLimits;
-  
+
   uint32_t  flash_start_address;
-  
+
   FlashIAP  flash;
 
   auto result = flash.init();
-  
+
   if (result != 0)
     return { };
 
@@ -82,14 +82,16 @@ static FlashIAPLimits getFlashIAPLimits()
   int sector_size     = flash.get_sector_size(FLASHIAP_APP_ROM_END_ADDR);
 
   flash_start_address           = flash.get_flash_start();
+
   flashIAPLimits.start_address  = align_up(FLASHIAP_APP_ROM_END_ADDR, sector_size);
+
   flashIAPLimits.flash_size     = flash.get_flash_size();
 
   result = flash.deinit();
 
   flashIAPLimits.available_size = flash_start_address + flashIAPLimits.flash_size - flashIAPLimits.start_address;
-  
-  if (flashIAPLimits.available_size % (sector_size * 2)) 
+
+  if (flashIAPLimits.available_size % (sector_size * 2))
   {
     flashIAPLimits.available_size = align_down(flashIAPLimits.available_size, sector_size * 2);
   }
