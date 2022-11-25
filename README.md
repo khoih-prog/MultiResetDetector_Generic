@@ -635,7 +635,7 @@ Detects a `multi-reset` so that an alternative start-up mode can be used. One ex
    
 #### Example [checkWaitingMRD](examples/checkWaitingMRD)
 
-https://github.com/khoih-prog/MultiResetDetector_Generic/blob/33fbdba9711d58e6879c22ee7681d72c57e6c50e/examples/checkWaitingMRD/checkWaitingMRD.ino#L52-L165
+https://github.com/khoih-prog/MultiResetDetector_Generic/blob/7a93b667ffccb17b1e6ff90cc20c0283975a7e48/examples/checkWaitingMRD/checkWaitingMRD.ino#L52-L167
 
 
 ---
